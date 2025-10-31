@@ -20,13 +20,10 @@
             overflow-x: hidden;
         }
 
-        /* Pusheen flotantes decorativos de fondo */
         .floating-pusheen {
             position: fixed;
             width: 80px;
             height: 80px;
-            background-size: contain;
-            background-repeat: no-repeat;
             animation: float 4s ease-in-out infinite;
             z-index: 1;
             opacity: 0.2;
@@ -88,9 +85,6 @@
             width: 150px;
             height: 150px;
             margin: 0 auto 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
         }
 
         .header-pusheen {
@@ -159,23 +153,19 @@
             color: #ff69b4;
             font-size: 2em;
             margin: 30px 0 20px 0;
-            padding: 15px 15px 15px 70px;
+            padding: 15px;
             background: linear-gradient(135deg, #fff0f5 0%, #e6f3ff 100%);
             border-radius: 15px;
             border-left: 8px solid #ff69b4;
-            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 15px;
         }
 
-        h2::before {
-            content: '';
-            position: absolute;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
+        .h2-pusheen {
             width: 45px;
             height: 45px;
-            background-size: contain;
-            background-repeat: no-repeat;
+            flex-shrink: 0;
         }
 
         h3 {
@@ -196,15 +186,12 @@
             position: relative;
         }
 
-        .theory-box::after {
-            content: '';
+        .theory-box-pusheen {
             position: absolute;
             bottom: 10px;
             right: 10px;
             width: 60px;
             height: 60px;
-            background-size: contain;
-            background-repeat: no-repeat;
             opacity: 0.15;
         }
 
@@ -218,15 +205,12 @@
             position: relative;
         }
 
-        .example-box::after {
-            content: '';
+        .example-box-pusheen {
             position: absolute;
             top: 10px;
             right: 10px;
             width: 50px;
             height: 50px;
-            background-size: contain;
-            background-repeat: no-repeat;
             opacity: 0.15;
         }
 
@@ -264,16 +248,13 @@
             position: relative;
         }
 
-        .note::before {
-            content: '';
+        .note-pusheen {
             position: absolute;
             left: 10px;
             top: 50%;
             transform: translateY(-50%);
             width: 50px;
             height: 50px;
-            background-size: contain;
-            background-repeat: no-repeat;
         }
 
         .note strong {
@@ -302,8 +283,6 @@
         .pusheen-img {
             width: 70px;
             height: 70px;
-            background-size: contain;
-            background-repeat: no-repeat;
             animation: bounce 2s ease-in-out infinite;
         }
 
@@ -312,35 +291,23 @@
             50% { transform: translateY(-15px) scale(1.1); }
         }
 
-        .pusheen-small {
-            width: 35px;
-            height: 35px;
-            display: inline-block;
-            background-size: contain;
-            background-repeat: no-repeat;
-            vertical-align: middle;
-            margin: 0 5px;
-        }
-
         .practice-container {
             background: linear-gradient(135deg, #fff5ee 0%, #ffe4e1 100%);
             padding: 30px;
+            padding-top: 60px;
             border-radius: 20px;
             margin: 25px 0;
             border: 3px solid #ff69b4;
             position: relative;
         }
 
-        .practice-container::before {
-            content: '';
+        .practice-pusheen {
             position: absolute;
             top: -30px;
             left: 50%;
             transform: translateX(-50%);
             width: 80px;
             height: 80px;
-            background-size: contain;
-            background-repeat: no-repeat;
         }
 
         .question {
@@ -432,7 +399,6 @@
             
             h2 {
                 font-size: 1.5em;
-                padding-left: 60px;
             }
             
             .nav-btn {
@@ -476,9 +442,13 @@
 
         <!-- SECCIÓN 1: MÉTODOS ALGEBRAICOS -->
         <div id="metodos" class="section active">
-            <h2 style="background-image: url('https://i.imgur.com/9bgXqWp.png');">🎀 Métodos Algebraicos para Sistemas de Ecuaciones</h2>
+            <h2>
+                <img src="https://i.imgur.com/9bgXqWp.png" class="h2-pusheen" alt="pusheen">
+                🎀 Métodos Algebraicos para Sistemas de Ecuaciones
+            </h2>
             
-            <div class="theory-box" style="background-image: url('https://i.imgur.com/9bgXqWp.png');">
+            <div class="theory-box">
+                <img src="https://i.imgur.com/9bgXqWp.png" class="theory-box-pusheen" alt="pusheen">
                 <h3>📖 ¿Qué es un sistema de ecuaciones lineales?</h3>
                 <p>Un sistema de ecuaciones lineales es un conjunto de dos o más ecuaciones que comparten las mismas variables. Nuestro objetivo es encontrar los valores de estas variables que satisfagan todas las ecuaciones al mismo tiempo.</p>
                 
@@ -488,12 +458,14 @@
                     a₂x + b₂y = c₂
                 </div>
 
-                <div class="note" style="background-image: url('https://i.imgur.com/9bgXqWp.png');">
+                <div class="note">
+                    <img src="https://i.imgur.com/9bgXqWp.png" class="note-pusheen" alt="pusheen">
                     <strong>💡 Nota de Pusheen:</strong> ¡Imagina que cada ecuación es una línea! La solución es donde se cruzan estas líneas. ¡Miau! 🐱
                 </div>
             </div>
 
-            <div class="theory-box" style="background-image: url('https://i.imgur.com/9bgXqWp.png');">
+            <div class="theory-box">
+                <img src="https://i.imgur.com/9bgXqWp.png" class="theory-box-pusheen" alt="pusheen">
                 <h3>🌟 Método de Sustitución</h3>
                 <p>Este método consiste en despejar una variable de una ecuación y sustituirla en la otra.</p>
                 
@@ -511,7 +483,8 @@
                 </ol>
             </div>
 
-            <div class="example-box" style="background-image: url('https://i.imgur.com/9bgXqWp.png');">
+            <div class="example-box">
+                <img src="https://i.imgur.com/9bgXqWp.png" class="example-box-pusheen" alt="pusheen">
                 <h3>✨ Ejemplo Resuelto - Método de Sustitución</h3>
                 <p><strong>Resolver:</strong></p>
                 <div class="formula">
@@ -543,7 +516,8 @@
                     <span class="step-number">✅ Solución:</span> x = 3, y = 1
                 </div>
 
-                <div class="note" style="background-image: url('https://i.imgur.com/9bgXqWp.png');">
+                <div class="note">
+                    <img src="https://i.imgur.com/9bgXqWp.png" class="note-pusheen" alt="pusheen">
                     <strong>🎀 Verificación:</strong><br>
                     2(3) + 1 = 7 ✓<br>
                     3 - 1 = 2 ✓
@@ -555,7 +529,8 @@
                 <span style="font-size: 2.5em;">✨</span>
             </div>
 
-            <div class="theory-box" style="background-image: url('https://i.imgur.com/9bgXqWp.png');">
+            <div class="theory-box">
+                <img src="https://i.imgur.com/9bgXqWp.png" class="theory-box-pusheen" alt="pusheen">
                 <h3>🌸 Método de Igualación</h3>
                 <p>Este método consiste en despejar la misma variable de ambas ecuaciones e igualar las expresiones.</p>
                 
@@ -567,8 +542,8 @@
                     <li>Sustituye el valor encontrado para hallar la otra variable</li>
                 </ol>
             </div>
-
-            <div class="example-box" style="background-image: url('https://i.imgur.com/9bgXqWp.png');">
+            <div class="example-box">
+                <img src="https://i.imgur.com/9bgXqWp.png" class="example-box-pusheen" alt="pusheen">
                 <h3>✨ Ejemplo Resuelto - Método de Igualación</h3>
                 <p><strong>Resolver:</strong></p>
                 <div class="formula">
@@ -612,7 +587,9 @@
                 <span style="font-size: 2.5em;">💕</span>
                 <img src="https://i.imgur.com/9bgXqWp.png" class="pusheen-img" alt="Pusheen">
             </div>
-            <div class="theory-box" style="background-image: url('https://i.imgur.com/9bgXqWp.png');">
+
+            <div class="theory-box">
+                <img src="https://i.imgur.com/9bgXqWp.png" class="theory-box-pusheen" alt="pusheen">
                 <h3>💖 Método de Reducción (Eliminación)</h3>
                 <p>Este método consiste en multiplicar las ecuaciones por números adecuados para que al sumarlas o restarlas, se elimine una variable.</p>
                 
@@ -625,7 +602,8 @@
                 </ol>
             </div>
 
-            <div class="example-box" style="background-image: url('https://i.imgur.com/9bgXqWp.png');">
+            <div class="example-box">
+                <img src="https://i.imgur.com/9bgXqWp.png" class="example-box-pusheen" alt="pusheen">
                 <h3>✨ Ejemplo Resuelto - Método de Reducción</h3>
                 <p><strong>Resolver:</strong></p>
                 <div class="formula">
@@ -666,9 +644,13 @@
 
         <!-- SECCIÓN 2: OPERACIONES CON MATRICES -->
         <div id="matrices" class="section">
-            <h2 style="background-image: url('https://i.imgur.com/9bgXqWp.png');">🎀 Operaciones con Matrices</h2>
+            <h2>
+                <img src="https://i.imgur.com/9bgXqWp.png" class="h2-pusheen" alt="pusheen">
+                🎀 Operaciones con Matrices
+            </h2>
             
-            <div class="theory-box" style="background-image: url('https://i.imgur.com/9bgXqWp.png');">
+            <div class="theory-box">
+                <img src="https://i.imgur.com/9bgXqWp.png" class="theory-box-pusheen" alt="pusheen">
                 <h3>📖 ¿Qué es una Matriz?</h3>
                 <p>Una matriz es un arreglo rectangular de números organizados en filas y columnas. Se representa con letras mayúsculas.</p>
                 
@@ -678,12 +660,14 @@
                     &nbsp;&nbsp;&nbsp;&nbsp;[ a₂₁  a₂₂  a₂₃ ]
                 </div>
 
-                <div class="note" style="background-image: url('https://i.imgur.com/9bgXqWp.png');">
+                <div class="note">
+                    <img src="https://i.imgur.com/9bgXqWp.png" class="note-pusheen" alt="pusheen">
                     <strong>💡 Nota de Pusheen:</strong> El orden de una matriz se escribe como filas × columnas. ¡Es como una cuadrícula de gatitos! 🐱
                 </div>
             </div>
 
-            <div class="theory-box" style="background-image: url('https://i.imgur.com/9bgXqWp.png');">
+            <div class="theory-box">
+                <img src="https://i.imgur.com/9bgXqWp.png" class="theory-box-pusheen" alt="pusheen">
                 <h3>➕ Suma y Resta de Matrices</h3>
                 <p>Dos matrices se pueden sumar o restar solo si tienen el mismo orden. La operación se realiza elemento a elemento.</p>
                 
@@ -693,7 +677,8 @@
                 </div>
             </div>
 
-            <div class="example-box" style="background-image: url('https://i.imgur.com/9bgXqWp.png');">
+            <div class="example-box">
+                <img src="https://i.imgur.com/9bgXqWp.png" class="example-box-pusheen" alt="pusheen">
                 <h3>✨ Ejemplo Resuelto - Suma de Matrices</h3>
                 
                 <div class="step">
@@ -723,7 +708,8 @@
                 <span style="font-size: 3em;">💕</span>
             </div>
 
-            <div class="theory-box" style="background-image: url('https://i.imgur.com/9bgXqWp.png');">
+            <div class="theory-box">
+                <img src="https://i.imgur.com/9bgXqWp.png" class="theory-box-pusheen" alt="pusheen">
                 <h3>✖️ Multiplicación de una Matriz por un Escalar</h3>
                 <p>Para multiplicar una matriz por un número (escalar), multiplicamos cada elemento de la matriz por ese número.</p>
                 
@@ -732,7 +718,8 @@
                 </div>
             </div>
 
-            <div class="example-box" style="background-image: url('https://i.imgur.com/9bgXqWp.png');">
+            <div class="example-box">
+                <img src="https://i.imgur.com/9bgXqWp.png" class="example-box-pusheen" alt="pusheen">
                 <h3>✨ Ejemplo Resuelto - Producto por Escalar</h3>
                 
                 <div class="step">
@@ -754,7 +741,8 @@
                 </div>
             </div>
 
-            <div class="theory-box" style="background-image: url('https://i.imgur.com/9bgXqWp.png');">
+            <div class="theory-box">
+                <img src="https://i.imgur.com/9bgXqWp.png" class="theory-box-pusheen" alt="pusheen">
                 <h3>🔢 Multiplicación de Matrices</h3>
                 <p>Dos matrices A y B se pueden multiplicar si el número de columnas de A es igual al número de filas de B.</p>
                 
@@ -764,12 +752,14 @@
                     cᵢⱼ = Σ(aᵢₖ · bₖⱼ)
                 </div>
 
-                <div class="note" style="background-image: url('https://i.imgur.com/9bgXqWp.png');">
+                <div class="note">
+                    <img src="https://i.imgur.com/9bgXqWp.png" class="note-pusheen" alt="pusheen">
                     <strong>💡 Nota de Pusheen:</strong> Cada elemento de C se obtiene multiplicando fila por columna. ¡Es como hacer sumas de productos! 🐱✨
                 </div>
             </div>
 
-            <div class="example-box" style="background-image: url('https://i.imgur.com/9bgXqWp.png');">
+            <div class="example-box">
+                <img src="https://i.imgur.com/9bgXqWp.png" class="example-box-pusheen" alt="pusheen">
                 <h3>✨ Ejemplo Resuelto - Multiplicación de Matrices</h3>
                 
                 <div class="step">
@@ -805,7 +795,8 @@
                 </div>
             </div>
 
-            <div class="theory-box" style="background-image: url('https://i.imgur.com/9bgXqWp.png');">
+            <div class="theory-box">
+                <img src="https://i.imgur.com/9bgXqWp.png" class="theory-box-pusheen" alt="pusheen">
                 <h3>🔄 Matriz Identidad y Matriz Inversa</h3>
                 <p><strong>Matriz Identidad (I):</strong> Es una matriz cuadrada con unos en la diagonal principal y ceros en el resto.</p>
                 
@@ -821,12 +812,14 @@
                     A · A⁻¹ = I
                 </div>
 
-                <div class="note" style="background-image: url('https://i.imgur.com/9bgXqWp.png');">
+                <div class="note">
+                    <img src="https://i.imgur.com/9bgXqWp.png" class="note-pusheen" alt="pusheen">
                     <strong>💡 Nota de Pusheen:</strong> No todas las matrices tienen inversa. Solo las matrices cuadradas con determinante ≠ 0 tienen inversa. ¡Miau! 🐱
                 </div>
             </div>
 
-            <div class="example-box" style="background-image: url('https://i.imgur.com/9bgXqWp.png');">
+            <div class="example-box">
+                <img src="https://i.imgur.com/9bgXqWp.png" class="example-box-pusheen" alt="pusheen">
                 <h3>✨ Ejemplo - Matriz Inversa 2×2</h3>
                 <p>Para una matriz 2×2, la fórmula de la inversa es:</p>
                 
@@ -870,18 +863,24 @@
 
         <!-- SECCIÓN 3: MÉTODO DE CRAMER -->
         <div id="cramer" class="section">
-            <h2 style="background-image: url('https://i.imgur.com/9bgXqWp.png');">🎀 Método de Cramer</h2>
+            <h2>
+                <img src="https://i.imgur.com/9bgXqWp.png" class="h2-pusheen" alt="pusheen">
+                🎀 Método de Cramer
+            </h2>
             
-            <div class="theory-box" style="background-image: url('https://i.imgur.com/9bgXqWp.png');">
+            <div class="theory-box">
+                <img src="https://i.imgur.com/9bgXqWp.png" class="theory-box-pusheen" alt="pusheen">
                 <h3>📖 ¿Qué es el Método de Cramer?</h3>
                 <p>El método de Cramer es una técnica para resolver sistemas de ecuaciones lineales usando determinantes. Es muy útil cuando el sistema tiene una solución única.</p>
                 
-                <div class="note" style="background-image: url('https://i.imgur.com/9bgXqWp.png');">
+                <div class="note">
+                    <img src="https://i.imgur.com/9bgXqWp.png" class="note-pusheen" alt="pusheen">
                     <strong>💡 Nota de Pusheen:</strong> ¡Este método usa determinantes! Primero necesitamos saber calcularlos. ¡Miau! 🐱
                 </div>
             </div>
 
-            <div class="theory-box" style="background-image: url('https://i.imgur.com/9bgXqWp.png');">
+            <div class="theory-box">
+                <img src="https://i.imgur.com/9bgXqWp.png" class="theory-box-pusheen" alt="pusheen">
                 <h3>🔢 Determinantes</h3>
                 <p><strong>Determinante de una matriz 2×2:</strong></p>
                 
@@ -900,8 +899,8 @@
                     det(A) = aei + bfg + cdh - ceg - afh - bdi
                 </div>
             </div>
-
-            <div class="example-box" style="background-image: url('https://i.imgur.com/9bgXqWp.png');">
+            <div class="example-box">
+                <img src="https://i.imgur.com/9bgXqWp.png" class="example-box-pusheen" alt="pusheen">
                 <h3>✨ Ejemplo - Determinante 2×2</h3>
                 
                 <div class="step">
@@ -927,7 +926,8 @@
                 <span style="font-size: 2.5em;">🔢</span>
             </div>
 
-            <div class="example-box" style="background-image: url('https://i.imgur.com/9bgXqWp.png');">
+            <div class="example-box">
+                <img src="https://i.imgur.com/9bgXqWp.png" class="example-box-pusheen" alt="pusheen">
                 <h3>✨ Ejemplo - Determinante 3×3</h3>
                 
                 <div class="step">
@@ -959,7 +959,8 @@
                 </div>
             </div>
 
-            <div class="theory-box" style="background-image: url('https://i.imgur.com/9bgXqWp.png');">
+            <div class="theory-box">
+                <img src="https://i.imgur.com/9bgXqWp.png" class="theory-box-pusheen" alt="pusheen">
                 <h3>🌟 Fórmula del Método de Cramer</h3>
                 <p>Para un sistema de ecuaciones lineales AX = B, donde A es la matriz de coeficientes:</p>
                 
@@ -971,11 +972,14 @@
                     donde Aᵢ es la matriz A con la columna i reemplazada por B
                 </div>
 
-                <div class="note" style="background-image: url('https://i.imgur.com/9bgXqWp.png');">
+                <div class="note">
+                    <img src="https://i.imgur.com/9bgXqWp.png" class="note-pusheen" alt="pusheen">
                     <strong>⚠️ Importante:</strong> El método solo funciona si det(A) ≠ 0. Si det(A) = 0, el sistema no tiene solución única.
                 </div>
             </div>
-            <div class="example-box" style="background-image: url('https://i.imgur.com/9bgXqWp.png');">
+
+            <div class="example-box">
+                <img src="https://i.imgur.com/9bgXqWp.png" class="example-box-pusheen" alt="pusheen">
                 <h3>✨ Ejemplo Completo - Sistema 2×2 con Cramer</h3>
                 <p><strong>Resolver:</strong></p>
                 <div class="formula">
@@ -1019,7 +1023,8 @@
                     <span class="step-number">✅ Solución:</span> x = 2.2, y = 1.2
                 </div>
 
-                <div class="note" style="background-image: url('https://i.imgur.com/9bgXqWp.png');">
+                <div class="note">
+                    <img src="https://i.imgur.com/9bgXqWp.png" class="note-pusheen" alt="pusheen">
                     <strong>🎀 Verificación:</strong><br>
                     2(2.2) + 3(1.2) = 4.4 + 3.6 = 8 ✓<br>
                     2.2 - 1.2 = 1 ✓
@@ -1032,7 +1037,8 @@
                 <img src="https://i.imgur.com/9bgXqWp.png" class="pusheen-img" alt="Pusheen">
             </div>
 
-            <div class="example-box" style="background-image: url('https://i.imgur.com/9bgXqWp.png');">
+            <div class="example-box">
+                <img src="https://i.imgur.com/9bgXqWp.png" class="example-box-pusheen" alt="pusheen">
                 <h3>✨ Ejemplo Completo - Sistema 3×3 con Cramer</h3>
                 <p><strong>Resolver:</strong></p>
                 <div class="formula">
@@ -1105,9 +1111,13 @@
 
         <!-- SECCIÓN 4: PROBLEMAS APLICADOS -->
         <div id="problemas" class="section">
-            <h2 style="background-image: url('https://i.imgur.com/9bgXqWp.png');">🎀 Resolución de Problemas Aplicados</h2>
+            <h2>
+                <img src="https://i.imgur.com/9bgXqWp.png" class="h2-pusheen" alt="pusheen">
+                🎀 Resolución de Problemas Aplicados
+            </h2>
             
-            <div class="theory-box" style="background-image: url('https://i.imgur.com/9bgXqWp.png');">
+            <div class="theory-box">
+                <img src="https://i.imgur.com/9bgXqWp.png" class="theory-box-pusheen" alt="pusheen">
                 <h3>📖 Cómo plantear problemas con sistemas de ecuaciones</h3>
                 <p><strong>Pasos para resolver problemas:</strong></p>
                 <ol>
@@ -1119,12 +1129,14 @@
                     <li><strong>Verificar</strong> que la solución tenga sentido</li>
                 </ol>
 
-                <div class="note" style="background-image: url('https://i.imgur.com/9bgXqWp.png');">
+                <div class="note">
+                    <img src="https://i.imgur.com/9bgXqWp.png" class="note-pusheen" alt="pusheen">
                     <strong>💡 Nota de Pusheen:</strong> ¡Lo más importante es traducir bien las palabras a matemáticas! 🐱📝
                 </div>
             </div>
 
-            <div class="example-box" style="background-image: url('https://i.imgur.com/9bgXqWp.png');">
+            <div class="example-box">
+                <img src="https://i.imgur.com/9bgXqWp.png" class="example-box-pusheen" alt="pusheen">
                 <h3>✨ Problema 1: Números</h3>
                 <p><strong>Enunciado:</strong> La suma de dos números es 50 y su diferencia es 10. ¿Cuáles son los números?</p>
 
@@ -1157,7 +1169,8 @@
                     <span class="step-number">✅ Respuesta:</span> Los números son 30 y 20
                 </div>
 
-                <div class="note" style="background-image: url('https://i.imgur.com/9bgXqWp.png');">
+                <div class="note">
+                    <img src="https://i.imgur.com/9bgXqWp.png" class="note-pusheen" alt="pusheen">
                     <strong>🎀 Verificación:</strong><br>
                     30 + 20 = 50 ✓<br>
                     30 - 20 = 10 ✓
@@ -1169,7 +1182,8 @@
                 <span style="font-size: 2.5em;">🔢</span>
             </div>
 
-            <div class="example-box" style="background-image: url('https://i.imgur.com/9bgXqWp.png');">
+            <div class="example-box">
+                <img src="https://i.imgur.com/9bgXqWp.png" class="example-box-pusheen" alt="pusheen">
                 <h3>✨ Problema 2: Edades</h3>
                 <p><strong>Enunciado:</strong> María tiene el doble de edad que Ana. Dentro de 5 años, la suma de sus edades será 40 años. ¿Qué edad tiene cada una ahora?</p>
 
@@ -1207,7 +1221,8 @@
                     <span class="step-number">✅ Respuesta:</span> María tiene 20 años y Ana tiene 10 años
                 </div>
 
-                <div class="note" style="background-image: url('https://i.imgur.com/9bgXqWp.png');">
+                <div class="note">
+                    <img src="https://i.imgur.com/9bgXqWp.png" class="note-pusheen" alt="pusheen">
                     <strong>🎀 Verificación:</strong><br>
                     20 = 2(10) ✓<br>
                     (20+5) + (10+5) = 25 + 15 = 40 ✓
@@ -1220,7 +1235,8 @@
                 <img src="https://i.imgur.com/9bgXqWp.png" class="pusheen-img" alt="Pusheen">
             </div>
 
-            <div class="example-box" style="background-image: url('https://i.imgur.com/9bgXqWp.png');">
+            <div class="example-box">
+                <img src="https://i.imgur.com/9bgXqWp.png" class="example-box-pusheen" alt="pusheen">
                 <h3>✨ Problema 3: Dinero y Precios</h3>
                 <p><strong>Enunciado:</strong> En una tienda, 3 cuadernos y 2 lapiceros cuestan $15. Si 2 cuadernos y 4 lapiceros cuestan $14, ¿cuánto cuesta cada artículo?</p>
 
@@ -1258,7 +1274,8 @@
                     <span class="step-number">✅ Respuesta:</span> Cada cuaderno cuesta $4 y cada lapicero cuesta $1.50
                 </div>
 
-                <div class="note" style="background-image: url('https://i.imgur.com/9bgXqWp.png');">
+                <div class="note">
+                    <img src="https://i.imgur.com/9bgXqWp.png" class="note-pusheen" alt="pusheen">
                     <strong>🎀 Verificación:</strong><br>
                     3(4) + 2(1.5) = 12 + 3 = 15 ✓<br>
                     2(4) + 4(1.5) = 8 + 6 = 14 ✓
@@ -1269,8 +1286,8 @@
                 <img src="https://i.imgur.com/9bgXqWp.png" class="pusheen-img" alt="Pusheen">
                 <span style="font-size: 2.5em;">💰📝</span>
             </div>
-
-            <div class="example-box" style="background-image: url('https://i.imgur.com/9bgXqWp.png');">
+            <div class="example-box">
+                <img src="https://i.imgur.com/9bgXqWp.png" class="example-box-pusheen" alt="pusheen">
                 <h3>✨ Problema 4: Mezclas</h3>
                 <p><strong>Enunciado:</strong> Se mezclan dos tipos de café: uno de $12 por kg y otro de $18 por kg. Si queremos obtener 10 kg de mezcla a $15 por kg, ¿cuántos kg de cada tipo debemos usar?</p>
 
@@ -1314,7 +1331,8 @@
                 <img src="https://i.imgur.com/9bgXqWp.png" class="pusheen-img" alt="Pusheen">
             </div>
 
-            <div class="example-box" style="background-image: url('https://i.imgur.com/9bgXqWp.png');">
+            <div class="example-box">
+                <img src="https://i.imgur.com/9bgXqWp.png" class="example-box-pusheen" alt="pusheen">
                 <h3>✨ Problema 5: Geometría</h3>
                 <p><strong>Enunciado:</strong> Un rectángulo tiene un perímetro de 40 cm. Si el largo es 4 cm más que el doble del ancho, ¿cuáles son sus dimensiones?</p>
 
@@ -1353,9 +1371,13 @@
                 <span style="font-size: 2.5em;">💕✨</span>
             </div>
         </div>
+
         <!-- SECCIÓN 5: PRÁCTICA INTERACTIVA -->
         <div id="practica" class="section">
-            <h2 style="background-image: url('https://i.imgur.com/9bgXqWp.png');">🎯 ¡Hora de Practicar!</h2>
+            <h2>
+                <img src="https://i.imgur.com/9bgXqWp.png" class="h2-pusheen" alt="pusheen">
+                🎯 ¡Hora de Practicar!
+            </h2>
             
             <div class="pusheen-decoration">
                 <img src="https://i.imgur.com/9bgXqWp.png" class="pusheen-img" alt="Pusheen">
@@ -1364,7 +1386,8 @@
             </div>
 
             <!-- PRÁCTICA 1: MÉTODOS ALGEBRAICOS -->
-            <div class="practice-container" style="background-image: url('https://i.imgur.com/9bgXqWp.png');">
+            <div class="practice-container">
+                <img src="https://i.imgur.com/9bgXqWp.png" class="practice-pusheen" alt="pusheen">
                 <h3 style="text-align: center; color: #ff69b4; margin-bottom: 20px;">🌸 Práctica 1: Métodos Algebraicos</h3>
                 
                 <div class="question">
@@ -1447,7 +1470,8 @@
             </div>
 
             <!-- PRÁCTICA 2: MATRICES -->
-            <div class="practice-container" style="background-image: url('https://i.imgur.com/9bgXqWp.png');">
+            <div class="practice-container">
+                <img src="https://i.imgur.com/9bgXqWp.png" class="practice-pusheen" alt="pusheen">
                 <h3 style="text-align: center; color: #87ceeb; margin-bottom: 20px;">🔢 Práctica 2: Operaciones con Matrices</h3>
                 
                 <div class="question">
@@ -1524,7 +1548,8 @@
             </div>
 
             <!-- PRÁCTICA 3: MÉTODO DE CRAMER -->
-            <div class="practice-container" style="background-image: url('https://i.imgur.com/9bgXqWp.png');">
+            <div class="practice-container">
+                <img src="https://i.imgur.com/9bgXqWp.png" class="practice-pusheen" alt="pusheen">
                 <h3 style="text-align: center; color: #ff69b4; margin-bottom: 20px;">✨ Práctica 3: Método de Cramer</h3>
                 
                 <div class="question">
@@ -1600,7 +1625,8 @@
             </div>
 
             <!-- PRÁCTICA 4: PROBLEMAS APLICADOS -->
-            <div class="practice-container" style="background-image: url('https://i.imgur.com/9bgXqWp.png');">
+            <div class="practice-container">
+                <img src="https://i.imgur.com/9bgXqWp.png" class="practice-pusheen" alt="pusheen">
                 <h3 style="text-align: center; color: #87ceeb; margin-bottom: 20px;">💡 Práctica 4: Problemas Aplicados</h3>
                 
                 <div class="question">
@@ -1675,212 +1701,3 @@
                 <span style="font-size: 2.5em;">🌟</span>
                 <img src="https://i.imgur.com/9bgXqWp.png" class="pusheen-img" alt="Pusheen">
             </div>
-
-            <!-- PRÁCTICA 5: MIXTA -->
-            <div class="practice-container" style="background-image: url('https://i.imgur.com/9bgXqWp.png');">
-                <h3 style="text-align: center; color: #ff69b4; margin-bottom: 20px;">🎯 Práctica 5: Repaso General</h3>
-                
-                <div class="question">
-                    <h4>Pregunta 1: ¿Cuál es el primer paso para resolver un problema con sistemas de ecuaciones?</h4>
-                    
-                    <div class="option" onclick="selectOption(this, 'p5q1')">
-                        <input type="radio" name="p5q1" value="a">
-                        a) Resolver las ecuaciones inmediatamente
-                    </div>
-                    <div class="option" onclick="selectOption(this, 'p5q1')">
-                        <input type="radio" name="p5q1" value="b">
-                        b) Identificar las incógnitas y asignar variables
-                    </div>
-                    <div class="option" onclick="selectOption(this, 'p5q1')">
-                        <input type="radio" name="p5q1" value="c">
-                        c) Calcular determinantes
-                    </div>
-                    <div class="option" onclick="selectOption(this, 'p5q1')">
-                        <input type="radio" name="p5q1" value="d">
-                        d) Graficar las ecuaciones
-                    </div>
-                </div>
-
-                <div class="question">
-                    <h4>Pregunta 2: Si det(A) = 0, ¿qué podemos concluir sobre la matriz A?</h4>
-                    
-                    <div class="option" onclick="selectOption(this, 'p5q2')">
-                        <input type="radio" name="p5q2" value="a">
-                        a) A tiene inversa
-                    </div>
-                    <div class="option" onclick="selectOption(this, 'p5q2')">
-                        <input type="radio" name="p5q2" value="b">
-                        b) A no tiene inversa
-                    </div>
-                    <div class="option" onclick="selectOption(this, 'p5q2')">
-                        <input type="radio" name="p5q2" value="c">
-                        c) A es la matriz identidad
-                    </div>
-                    <div class="option" onclick="selectOption(this, 'p5q2')">
-                        <input type="radio" name="p5q2" value="d">
-                        d) A es una matriz nula
-                    </div>
-                </div>
-
-                <div class="question">
-                    <h4>Pregunta 3: ¿Cuál de estos NO es un método para resolver sistemas de ecuaciones?</h4>
-                    
-                    <div class="option" onclick="selectOption(this, 'p5q3')">
-                        <input type="radio" name="p5q3" value="a">
-                        a) Método de sustitución
-                    </div>
-                    <div class="option" onclick="selectOption(this, 'p5q3')">
-                        <input type="radio" name="p5q3" value="b">
-                        b) Método de Cramer
-                    </div>
-                    <div class="option" onclick="selectOption(this, 'p5q3')">
-                        <input type="radio" name="p5q3" value="c">
-                        c) Método de reducción
-                    </div>
-                    <div class="option" onclick="selectOption(this, 'p5q3')">
-                        <input type="radio" name="p5q3" value="d">
-                        d) Método de integración
-                    </div>
-                </div>
-
-                <button class="check-btn" onclick="checkAnswers('practice5')">Verificar Respuestas 🎀</button>
-                <div id="result-practice5" class="result"></div>
-            </div>
-
-            <div class="pusheen-decoration">
-                <img src="https://i.imgur.com/9bgXqWp.png" class="pusheen-img" alt="Pusheen">
-                <span style="font-size: 3em;">💕✨🎉</span>
-                <img src="https://i.imgur.com/9bgXqWp.png" class="pusheen-img" alt="Pusheen">
-            </div>
-
-            <div style="text-align: center; padding: 30px; background: linear-gradient(135deg, #fff0f5 0%, #e6f3ff 100%); border-radius: 20px; margin: 30px 0;">
-                <h3 style="color: #ff69b4; margin-bottom: 15px;">¡Felicitaciones! 🎊</h3>
-                <p style="font-size: 1.2em; color: #666;">Has completado toda la guía de Álgebra Lineal con Pusheen</p>
-                <p style="font-size: 1.1em; color: #87ceeb; margin-top: 10px;">¡Sigue practicando y serás una experta! 💪🐱</p>
-                <div style="margin-top: 20px;">
-                    <img src="https://i.imgur.com/9bgXqWp.png" style="width: 100px; height: 100px;" alt="Pusheen">
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        // Respuestas correctas
-        const correctAnswers = {
-            practice1: {
-                p1q1: 'b',  // x=6, y=4
-                p1q2: 'b',  // x=2
-                p1q3: 'c'   // Método de reducción
-            },
-            practice2: {
-                p2q1: 'a',  // [3 7; 3 8]
-                p2q2: 'b',  // [6 3; 12 9]
-                p2q3: 'b'   // columnas de A = filas de B
-            },
-            practice3: {
-                p3q1: 'b',  // det = 10
-                p3q2: 'a',  // cuando det(A) = 0
-                p3q3: 'b'   // columna reemplazada por B
-            },
-            practice4: {
-                p4q1: 'c',  // Juan tiene 30 años
-                p4q2: 'b',  // manzana cuesta $2
-                p4q3: 'd'   // número mayor es 14
-            },
-            practice5: {
-                p5q1: 'b',  // identificar incógnitas
-                p5q2: 'b',  // A no tiene inversa
-                p5q3: 'd'   // integración no es método
-            }
-        };
-
-        // Función para cambiar de sección
-        function showSection(sectionId) {
-            // Ocultar todas las secciones
-            const sections = document.querySelectorAll('.section');
-            sections.forEach(section => {
-                section.classList.remove('active');
-            });
-
-            // Mostrar la sección seleccionada
-            document.getElementById(sectionId).classList.add('active');
-
-            // Actualizar botones de navegación
-            const buttons = document.querySelectorAll('.nav-btn');
-            buttons.forEach(btn => {
-                btn.classList.remove('active');
-            });
-            event.target.classList.add('active');
-
-            // Scroll hacia arriba
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        // Función para seleccionar opción
-        function selectOption(element, questionName) {
-            // Deseleccionar todas las opciones del mismo grupo
-            const options = document.querySelectorAll(`input[name="${questionName}"]`);
-            options.forEach(opt => {
-                opt.parentElement.style.background = '#f8f8f8';
-                opt.parentElement.style.borderColor = 'transparent';
-            });
-
-            // Seleccionar la opción clickeada
-            const radio = element.querySelector('input[type="radio"]');
-            radio.checked = true;
-            element.style.background = '#ffe4e1';
-            element.style.borderColor = '#ffb6c1';
-        }
-
-        // Función para verificar respuestas
-        function checkAnswers(practiceId) {
-            const answers = correctAnswers[practiceId];
-            let correct = 0;
-            let total = Object.keys(answers).length;
-
-            // Verificar cada pregunta
-            for (let question in answers) {
-                const selected = document.querySelector(`input[name="${question}"]:checked`);
-                if (selected && selected.value === answers[question]) {
-                    correct++;
-                }
-            }
-
-            // Mostrar resultado
-            const resultDiv = document.getElementById(`result-${practiceId}`);
-            const percentage = (correct / total) * 100;
-
-            if (percentage === 100) {
-                resultDiv.className = 'result correct';
-                resultDiv.innerHTML = `
-                    <div style="font-size: 1.3em;">🎉 ¡PERFECTO! 🎉</div>
-                    <div>¡Respondiste todas correctamente! ${correct}/${total}</div>
-                    <div style="margin-top: 10px;">¡Pusheen está muy orgulloso de ti! 🐱💕</div>
-                `;
-            } else if (percentage >= 66) {
-                resultDiv.className = 'result correct';
-                resultDiv.innerHTML = `
-                    <div style="font-size: 1.3em;">✨ ¡MUY BIEN! ✨</div>
-                    <div>Respondiste ${correct}/${total} correctamente</div>
-                    <div style="margin-top: 10px;">¡Sigue así! 🐱💪</div>
-                `;
-            } else {
-                resultDiv.className = 'result incorrect';
-                resultDiv.innerHTML = `
-                    <div style="font-size: 1.3em;">📚 ¡Sigue practicando! 📚</div>
-                    <div>Respondiste ${correct}/${total} correctamente</div>
-                    <div style="margin-top: 10px;">Revisa la teoría y vuelve a intentarlo 🐱💕</div>
-                `;
-            }
-
-            // Scroll al resultado
-            resultDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        }
-
-        // Inicialización
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('Guía de Álgebra Lineal con Pusheen cargada correctamente! 🐱💕');
-        });
-    </script>
-</body>
-</html>
