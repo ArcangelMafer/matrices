@@ -1701,3 +1701,213 @@
                 <span style="font-size: 2.5em;">🌟</span>
                 <img src="https://i.imgur.com/9bgXqWp.png" class="pusheen-img" alt="Pusheen">
             </div>
+            <!-- PRÁCTICA 5: MIXTA -->
+            <div class="practice-container">
+                <img src="https://i.imgur.com/9bgXqWp.png" class="practice-pusheen" alt="pusheen">
+                <h3 style="text-align: center; color: #ff69b4; margin-bottom: 20px;">🎯 Práctica 5: Repaso General</h3>
+                
+                <div class="question">
+                    <h4>Pregunta 1: ¿Cuál es el primer paso para resolver un problema con sistemas de ecuaciones?</h4>
+                    
+                    <div class="option" onclick="selectOption(this, 'p5q1')">
+                        <input type="radio" name="p5q1" value="a">
+                        a) Resolver las ecuaciones inmediatamente
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'p5q1')">
+                        <input type="radio" name="p5q1" value="b">
+                        b) Identificar las incógnitas y asignar variables
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'p5q1')">
+                        <input type="radio" name="p5q1" value="c">
+                        c) Calcular determinantes
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'p5q1')">
+                        <input type="radio" name="p5q1" value="d">
+                        d) Graficar las ecuaciones
+                    </div>
+                </div>
+
+                <div class="question">
+                    <h4>Pregunta 2: Si det(A) = 0, ¿qué podemos concluir sobre la matriz A?</h4>
+                    
+                    <div class="option" onclick="selectOption(this, 'p5q2')">
+                        <input type="radio" name="p5q2" value="a">
+                        a) A tiene inversa
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'p5q2')">
+                        <input type="radio" name="p5q2" value="b">
+                        b) A no tiene inversa
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'p5q2')">
+                        <input type="radio" name="p5q2" value="c">
+                        c) A es la matriz identidad
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'p5q2')">
+                        <input type="radio" name="p5q2" value="d">
+                        d) A es una matriz nula
+                    </div>
+                </div>
+
+                <div class="question">
+                    <h4>Pregunta 3: ¿Cuál de estos NO es un método para resolver sistemas de ecuaciones?</h4>
+                    
+                    <div class="option" onclick="selectOption(this, 'p5q3')">
+                        <input type="radio" name="p5q3" value="a">
+                        a) Método de sustitución
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'p5q3')">
+                        <input type="radio" name="p5q3" value="b">
+                        b) Método de Cramer
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'p5q3')">
+                        <input type="radio" name="p5q3" value="c">
+                        c) Método de reducción
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'p5q3')">
+                        <input type="radio" name="p5q3" value="d">
+                        d) Método de integración
+                    </div>
+                </div>
+
+                <button class="check-btn" onclick="checkAnswers('practice5')">Verificar Respuestas 🎀</button>
+                <div id="result-practice5" class="result"></div>
+            </div>
+
+            <div class="pusheen-decoration">
+                <img src="https://i.imgur.com/9bgXqWp.png" class="pusheen-img" alt="Pusheen">
+                <span style="font-size: 3em;">💕✨🎉</span>
+                <img src="https://i.imgur.com/9bgXqWp.png" class="pusheen-img" alt="Pusheen">
+            </div>
+
+            <div style="text-align: center; padding: 30px; background: linear-gradient(135deg, #fff0f5 0%, #e6f3ff 100%); border-radius: 20px; margin: 30px 0;">
+                <h3 style="color: #ff69b4; margin-bottom: 15px;">¡Felicitaciones! 🎊</h3>
+                <p style="font-size: 1.2em; color: #666;">Has completado toda la guía de Álgebra Lineal con Pusheen</p>
+                <p style="font-size: 1.1em; color: #87ceeb; margin-top: 10px;">¡Sigue practicando y serás una experta! 💪🐱</p>
+                <div style="margin-top: 20px;">
+                    <img src="https://i.imgur.com/9bgXqWp.png" style="width: 100px; height: 100px;" alt="Pusheen">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Respuestas correctas
+        const correctAnswers = {
+            practice1: {
+                p1q1: 'b',  // x=6, y=4
+                p1q2: 'b',  // x=2
+                p1q3: 'c'   // Método de reducción
+            },
+            practice2: {
+                p2q1: 'a',  // [3 7; 3 8]
+                p2q2: 'b',  // [6 3; 12 9]
+                p2q3: 'b'   // columnas de A = filas de B
+            },
+            practice3: {
+                p3q1: 'b',  // det = 10
+                p3q2: 'a',  // cuando det(A) = 0
+                p3q3: 'b'   // columna reemplazada por B
+            },
+            practice4: {
+                p4q1: 'c',  // Juan tiene 30 años
+                p4q2: 'b',  // manzana cuesta $2
+                p4q3: 'd'   // número mayor es 14
+            },
+            practice5: {
+                p5q1: 'b',  // identificar incógnitas
+                p5q2: 'b',  // A no tiene inversa
+                p5q3: 'd'   // integración no es método
+            }
+        };
+
+        // Función para cambiar de sección
+        function showSection(sectionId) {
+            // Ocultar todas las secciones
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Mostrar la sección seleccionada
+            document.getElementById(sectionId).classList.add('active');
+
+            // Actualizar botones de navegación
+            const buttons = document.querySelectorAll('.nav-btn');
+            buttons.forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            // Scroll hacia arriba
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Función para seleccionar opción
+        function selectOption(element, questionName) {
+            // Deseleccionar todas las opciones del mismo grupo
+            const options = document.querySelectorAll(`input[name="${questionName}"]`);
+            options.forEach(opt => {
+                opt.parentElement.style.background = '#f8f8f8';
+                opt.parentElement.style.borderColor = 'transparent';
+            });
+
+            // Seleccionar la opción clickeada
+            const radio = element.querySelector('input[type="radio"]');
+            radio.checked = true;
+            element.style.background = '#ffe4e1';
+            element.style.borderColor = '#ffb6c1';
+        }
+
+        // Función para verificar respuestas
+        function checkAnswers(practiceId) {
+            const answers = correctAnswers[practiceId];
+            let correct = 0;
+            let total = Object.keys(answers).length;
+
+            // Verificar cada pregunta
+            for (let question in answers) {
+                const selected = document.querySelector(`input[name="${question}"]:checked`);
+                if (selected && selected.value === answers[question]) {
+                    correct++;
+                }
+            }
+
+            // Mostrar resultado
+            const resultDiv = document.getElementById(`result-${practiceId}`);
+            const percentage = (correct / total) * 100;
+
+            if (percentage === 100) {
+                resultDiv.className = 'result correct';
+                resultDiv.innerHTML = `
+                    <div style="font-size: 1.3em;">🎉 ¡PERFECTO! 🎉</div>
+                    <div>¡Respondiste todas correctamente! ${correct}/${total}</div>
+                    <div style="margin-top: 10px;">¡Pusheen está muy orgulloso de ti! 🐱💕</div>
+                `;
+            } else if (percentage >= 66) {
+                resultDiv.className = 'result correct';
+                resultDiv.innerHTML = `
+                    <div style="font-size: 1.3em;">✨ ¡MUY BIEN! ✨</div>
+                    <div>Respondiste ${correct}/${total} correctamente</div>
+                    <div style="margin-top: 10px;">¡Sigue así! 🐱💪</div>
+                `;
+            } else {
+                resultDiv.className = 'result incorrect';
+                resultDiv.innerHTML = `
+                    <div style="font-size: 1.3em;">📚 ¡Sigue practicando! 📚</div>
+                    <div>Respondiste ${correct}/${total} correctamente</div>
+                    <div style="margin-top: 10px;">Revisa la teoría y vuelve a intentarlo 🐱💕</div>
+                `;
+            }
+
+            // Scroll al resultado
+            resultDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        // Inicialización
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Guía de Álgebra Lineal con Pusheen cargada correctamente! 🐱💕');
+        });
+    </script>
+</body>
+</html>
+
