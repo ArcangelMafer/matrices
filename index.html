@@ -1,6 +1,1912 @@
 <!DOCTYPE html>
-hola
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Álgebra Lineal con Pusheen 🐱</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #ffeef8 0%, #e0f3ff 100%);
+            padding: 20px;
+            color: #333;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .floating-pusheen {
+            position: fixed;
+            width: 80px;
+            height: 80px;
+            animation: float 4s ease-in-out infinite;
+            z-index: 1;
+            opacity: 0.2;
+        }
+
+        .pusheen-1 { 
+            top: 10%; 
+            left: 5%; 
+            animation-delay: 0s;
+        }
+        .pusheen-2 { 
+            top: 30%; 
+            right: 8%; 
+            animation-delay: 1s;
+        }
+        .pusheen-3 { 
+            bottom: 20%; 
+            left: 10%; 
+            animation-delay: 2s;
+        }
+        .pusheen-4 { 
+            top: 60%; 
+            right: 5%; 
+            animation-delay: 1.5s;
+        }
+
+        @keyframes float {
+            0%, 100% { 
+                transform: translateY(0px) rotate(-3deg); 
+            }
+            50% { 
+                transform: translateY(-25px) rotate(3deg); 
+            }
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 30px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(255, 182, 193, 0.3);
+            border: 5px solid #ffb6c1;
+            position: relative;
+            z-index: 2;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, #ffc9e3 0%, #b8e6ff 100%);
+            border-radius: 20px;
+            border: 3px dashed #ff69b4;
+            position: relative;
+        }
+
+        .header-pusheen-container {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 20px;
+        }
+
+        .header-pusheen {
+            width: 100%;
+            height: 100%;
+        }
+
+        h1 {
+            color: #ff69b4;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(255, 182, 193, 0.5);
+        }
+
+        .subtitle {
+            color: #87ceeb;
+            font-size: 1.2em;
+            font-style: italic;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        .nav-btn {
+            background: linear-gradient(135deg, #ffb6c1 0%, #ff69b4 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 105, 180, 0.5);
+        }
+
+        .nav-btn.active {
+            background: linear-gradient(135deg, #87ceeb 0%, #4682b4 100%);
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            color: #ff69b4;
+            font-size: 2em;
+            margin: 30px 0 20px 0;
+            padding: 15px;
+            background: linear-gradient(135deg, #fff0f5 0%, #e6f3ff 100%);
+            border-radius: 15px;
+            border-left: 8px solid #ff69b4;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .h2-pusheen {
+            width: 45px;
+            height: 45px;
+            flex-shrink: 0;
+        }
+
+        h3 {
+            color: #87ceeb;
+            font-size: 1.5em;
+            margin: 25px 0 15px 0;
+            padding-left: 15px;
+            border-left: 5px solid #87ceeb;
+        }
+
+        .theory-box {
+            background: linear-gradient(135deg, #fff9fc 0%, #f0f8ff 100%);
+            padding: 25px;
+            border-radius: 20px;
+            margin: 20px 0;
+            border: 3px solid #ffb6c1;
+            box-shadow: 0 5px 15px rgba(255, 182, 193, 0.2);
+            position: relative;
+        }
+
+        .theory-box-pusheen {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            width: 60px;
+            height: 60px;
+            opacity: 0.15;
+        }
+
+        .example-box {
+            background: linear-gradient(135deg, #f0fff0 0%, #e0f0ff 100%);
+            padding: 25px;
+            border-radius: 20px;
+            margin: 20px 0;
+            border: 3px solid #87ceeb;
+            box-shadow: 0 5px 15px rgba(135, 206, 235, 0.2);
+            position: relative;
+        }
+
+        .example-box-pusheen {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 50px;
+            height: 50px;
+            opacity: 0.15;
+        }
+
+        .formula {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            text-align: center;
+            font-size: 1.2em;
+            border: 2px dashed #ffb6c1;
+            font-family: 'Courier New', monospace;
+        }
+
+        .step {
+            background: linear-gradient(135deg, #fffaf0 0%, #f5f5f5 100%);
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 15px;
+            border-left: 5px solid #ffa500;
+        }
+
+        .step-number {
+            color: #ff69b4;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .note {
+            background: #fff9e6;
+            padding: 15px 15px 15px 70px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 5px solid #ffd700;
+            position: relative;
+        }
+
+        .note-pusheen {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+        }
+
+        .note strong {
+            color: #ff69b4;
+        }
+
+        ul, ol {
+            margin: 15px 0 15px 30px;
+            line-height: 1.8;
+        }
+
+        li {
+            margin: 10px 0;
+        }
+
+        .pusheen-decoration {
+            text-align: center;
+            margin: 40px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .pusheen-img {
+            width: 70px;
+            height: 70px;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-15px) scale(1.1); }
+        }
+
+        .practice-container {
+            background: linear-gradient(135deg, #fff5ee 0%, #ffe4e1 100%);
+            padding: 30px;
+            padding-top: 60px;
+            border-radius: 20px;
+            margin: 25px 0;
+            border: 3px solid #ff69b4;
+            position: relative;
+        }
+
+        .practice-pusheen {
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 80px;
+        }
+
+        .question {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 15px;
+            border: 2px solid #ffb6c1;
+        }
+
+        .question h4 {
+            color: #ff69b4;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .option {
+            background: #f8f8f8;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .option:hover {
+            background: #ffe4e1;
+            border-color: #ffb6c1;
+            transform: translateX(5px);
+        }
+
+        .option input[type="radio"] {
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        .check-btn {
+            background: linear-gradient(135deg, #98fb98 0%, #90ee90 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: bold;
+            margin: 20px 0;
+            box-shadow: 0 4px 15px rgba(144, 238, 144, 0.3);
+            transition: all 0.3s;
+        }
+
+        .check-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(144, 238, 144, 0.5);
+        }
+
+        .result {
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            font-weight: bold;
+            text-align: center;
+            display: none;
+            font-size: 1.1em;
+        }
+
+        .result.correct {
+            background: #d4edda;
+            color: #155724;
+            border: 3px solid #28a745;
+            display: block;
+        }
+
+        .result.incorrect {
+            background: #f8d7da;
+            color: #721c24;
+            border: 3px solid #dc3545;
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            h2 {
+                font-size: 1.5em;
+            }
+            
+            .nav-btn {
+                padding: 12px 20px;
+                font-size: 0.9em;
+            }
+
+            .floating-pusheen {
+                display: none;
+            }
+
+            .note {
+                padding-left: 60px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Pusheens flotantes de fondo -->
+    <img src="https://scontent.flim28-1.fna.fbcdn.net/v/t39.30808-6/443819905_984899532998903_8296162074533095555_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=WiqHwF6FDD8Q7kNvwGu4Nmh&_nc_oc=AdmwCdsRJ3_glH9setHaCi2M7_GMFOPiKlcLA0oErtDOBpL2t1fB-s4_zse2Teety3Q&_nc_zt=23&_nc_ht=scontent.flim28-1.fna&_nc_gid=33f9sWu75vWfx9cP1aa9uA&oh=00_AfesGOcAx-i2qGRaK6EuArOGRcfDtS7DoV5OjX_Zf9XmbQ&oe=690C45A5" class="floating-pusheen pusheen-1" alt="pusheen">
+    <img src="https://scontent.flim28-1.fna.fbcdn.net/v/t39.30808-6/443819905_984899532998903_8296162074533095555_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=WiqHwF6FDD8Q7kNvwGu4Nmh&_nc_oc=AdmwCdsRJ3_glH9setHaCi2M7_GMFOPiKlcLA0oErtDOBpL2t1fB-s4_zse2Teety3Q&_nc_zt=23&_nc_ht=scontent.flim28-1.fna&_nc_gid=33f9sWu75vWfx9cP1aa9uA&oh=00_AfesGOcAx-i2qGRaK6EuArOGRcfDtS7DoV5OjX_Zf9XmbQ&oe=690C45A5" class="floating-pusheen pusheen-2" alt="pusheen">
+    <img src="https://scontent.flim28-1.fna.fbcdn.net/v/t39.30808-6/443819905_984899532998903_8296162074533095555_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=WiqHwF6FDD8Q7kNvwGu4Nmh&_nc_oc=AdmwCdsRJ3_glH9setHaCi2M7_GMFOPiKlcLA0oErtDOBpL2t1fB-s4_zse2Teety3Q&_nc_zt=23&_nc_ht=scontent.flim28-1.fna&_nc_gid=33f9sWu75vWfx9cP1aa9uA&oh=00_AfesGOcAx-i2qGRaK6EuArOGRcfDtS7DoV5OjX_Zf9XmbQ&oe=690C45A5" class="floating-pusheen pusheen-3" alt="pusheen">
+    <img src="https://scontent.flim28-1.fna.fbcdn.net/v/t39.30808-6/443819905_984899532998903_8296162074533095555_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=WiqHwF6FDD8Q7kNvwGu4Nmh&_nc_oc=AdmwCdsRJ3_glH9setHaCi2M7_GMFOPiKlcLA0oErtDOBpL2t1fB-s4_zse2Teety3Q&_nc_zt=23&_nc_ht=scontent.flim28-1.fna&_nc_gid=33f9sWu75vWfx9cP1aa9uA&oh=00_AfesGOcAx-i2qGRaK6EuArOGRcfDtS7DoV5OjX_Zf9XmbQ&oe=690C45A5" class="floating-pusheen pusheen-4" alt="pusheen">
+
+    <div class="container">
+        <header>
+            <div class="header-pusheen-container">
+                <img src="https://scontent.flim28-1.fna.fbcdn.net/v/t39.30808-6/443819905_984899532998903_8296162074533095555_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=WiqHwF6FDD8Q7kNvwGu4Nmh&_nc_oc=AdmwCdsRJ3_glH9setHaCi2M7_GMFOPiKlcLA0oErtDOBpL2t1fB-s4_zse2Teety3Q&_nc_zt=23&_nc_ht=scontent.flim28-1.fna&_nc_gid=33f9sWu75vWfx9cP1aa9uA&oh=00_AfesGOcAx-i2qGRaK6EuArOGRcfDtS7DoV5OjX_Zf9XmbQ&oe=690C45A5" alt="Pusheen" class="header-pusheen">
+            </div>
+            <h1>Álgebra Lineal con Pusheen</h1>
+            <p class="subtitle">¡Una guía súper linda para aprender! ✨</p>
+        </header>
+
+        <nav>
+            <button class="nav-btn active" onclick="showSection('metodos')">Métodos Algebraicos</button>
+            <button class="nav-btn" onclick="showSection('matrices')">Operaciones con Matrices</button>
+            <button class="nav-btn" onclick="showSection('cramer')">Método de Cramer</button>
+            <button class="nav-btn" onclick="showSection('problemas')">Problemas Aplicados</button>
+            <button class="nav-btn" onclick="showSection('practica')">¡A Practicar! 🎯</button>
+        </nav>
+
+        <!-- SECCIÓN 1: MÉTODOS ALGEBRAICOS -->
+        <div id="metodos" class="section active">
+            <h2>
+                <img src="https://scontent.flim28-1.fna.fbcdn.net/v/t39.30808-6/443819905_984899532998903_8296162074533095555_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=WiqHwF6FDD8Q7kNvwGu4Nmh&_nc_oc=AdmwCdsRJ3_glH9setHaCi2M7_GMFOPiKlcLA0oErtDOBpL2t1fB-s4_zse2Teety3Q&_nc_zt=23&_nc_ht=scontent.flim28-1.fna&_nc_gid=33f9sWu75vWfx9cP1aa9uA&oh=00_AfesGOcAx-i2qGRaK6EuArOGRcfDtS7DoV5OjX_Zf9XmbQ&oe=690C45A5" class="h2-pusheen" alt="pusheen">
+                🎀 Métodos Algebraicos para Sistemas de Ecuaciones
+            </h2>
+            
+            <div class="theory-box">
+                <img src="https://scontent.flim28-1.fna.fbcdn.net/v/t39.30808-6/443819905_984899532998903_8296162074533095555_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=WiqHwF6FDD8Q7kNvwGu4Nmh&_nc_oc=AdmwCdsRJ3_glH9setHaCi2M7_GMFOPiKlcLA0oErtDOBpL2t1fB-s4_zse2Teety3Q&_nc_zt=23&_nc_ht=scontent.flim28-1.fna&_nc_gid=33f9sWu75vWfx9cP1aa9uA&oh=00_AfesGOcAx-i2qGRaK6EuArOGRcfDtS7DoV5OjX_Zf9XmbQ&oe=690C45A5" class="theory-box-pusheen" alt="pusheen">
+                <h3>📖 ¿Qué es un sistema de ecuaciones lineales?</h3>
+                <p>Un sistema de ecuaciones lineales es un conjunto de dos o más ecuaciones que comparten las mismas variables. Nuestro objetivo es encontrar los valores de estas variables que satisfagan todas las ecuaciones al mismo tiempo.</p>
+                
+                <div class="formula">
+                    Sistema 2×2:<br>
+                    a₁x + b₁y = c₁<br>
+                    a₂x + b₂y = c₂
+                </div>
+
+                <div class="note">
+                    <img src="https://i.imgur.com/9bgXqWp.png" class="note-pusheen" alt="pusheen">
+                    <strong>💡 Nota de Pusheen:</strong> ¡Imagina que cada ecuación es una línea! La solución es donde se cruzan estas líneas. ¡Miau! 🐱
+                </div>
+            </div>
+
+            <div class="theory-box">
+                <img src="https://scontent.flim28-1.fna.fbcdn.net/v/t39.30808-6/443819905_984899532998903_8296162074533095555_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=WiqHwF6FDD8Q7kNvwGu4Nmh&_nc_oc=AdmwCdsRJ3_glH9setHaCi2M7_GMFOPiKlcLA0oErtDOBpL2t1fB-s4_zse2Teety3Q&_nc_zt=23&_nc_ht=scontent.flim28-1.fna&_nc_gid=33f9sWu75vWfx9cP1aa9uA&oh=00_AfesGOcAx-i2qGRaK6EuArOGRcfDtS7DoV5OjX_Zf9XmbQ&oe=690C45A5" class="theory-box-pusheen" alt="pusheen">
+                <h3>🌟 Método de Sustitución</h3>
+                <p>Este método consiste en despejar una variable de una ecuación y sustituirla en la otra.</p>
+                
+                <div class="pusheen-decoration">
+                    <img src="https://scontent.flim28-1.fna.fbcdn.net/v/t39.30808-6/443819905_984899532998903_8296162074533095555_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=WiqHwF6FDD8Q7kNvwGu4Nmh&_nc_oc=AdmwCdsRJ3_glH9setHaCi2M7_GMFOPiKlcLA0oErtDOBpL2t1fB-s4_zse2Teety3Q&_nc_zt=23&_nc_ht=scontent.flim28-1.fna&_nc_gid=33f9sWu75vWfx9cP1aa9uA&oh=00_AfesGOcAx-i2qGRaK6EuArOGRcfDtS7DoV5OjX_Zf9XmbQ&oe=690C45A5" class="pusheen-img" alt="Pusheen">
+                    <span style="font-size: 2em;">→ 📝</span>
+                </div>
+                
+                <p><strong>Pasos:</strong></p>
+                <ol>
+                    <li>Despeja una variable de cualquiera de las ecuaciones</li>
+                    <li>Sustituye esa expresión en la otra ecuación</li>
+                    <li>Resuelve la ecuación resultante</li>
+                    <li>Sustituye el valor encontrado en cualquier ecuación para hallar la otra variable</li>
+                </ol>
+            </div>
+
+            <div class="example-box">
+                <img src="https://scontent.flim28-1.fna.fbcdn.net/v/t39.30808-6/443819905_984899532998903_8296162074533095555_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=WiqHwF6FDD8Q7kNvwGu4Nmh&_nc_oc=AdmwCdsRJ3_glH9setHaCi2M7_GMFOPiKlcLA0oErtDOBpL2t1fB-s4_zse2Teety3Q&_nc_zt=23&_nc_ht=scontent.flim28-1.fna&_nc_gid=33f9sWu75vWfx9cP1aa9uA&oh=00_AfesGOcAx-i2qGRaK6EuArOGRcfDtS7DoV5OjX_Zf9XmbQ&oe=690C45A5" class="example-box-pusheen" alt="pusheen">
+                <h3>✨ Ejemplo Resuelto - Método de Sustitución</h3>
+                <p><strong>Resolver:</strong></p>
+                <div class="formula">
+                    2x + y = 7<br>
+                    x - y = 2
+                </div>
+
+                <div class="step">
+                    <span class="step-number">Paso 1:</span> Despejamos y de la primera ecuación<br>
+                    y = 7 - 2x
+                </div>
+
+                <div class="step">
+                    <span class="step-number">Paso 2:</span> Sustituimos en la segunda ecuación<br>
+                    x - (7 - 2x) = 2<br>
+                    x - 7 + 2x = 2<br>
+                    3x = 9<br>
+                    x = 3
+                </div>
+
+                <div class="step">
+                    <span class="step-number">Paso 3:</span> Sustituimos x = 3 en y = 7 - 2x<br>
+                    y = 7 - 2(3)<br>
+                    y = 7 - 6<br>
+                    y = 1
+                </div>
+
+                <div class="step">
+                    <span class="step-number">✅ Solución:</span> x = 3, y = 1
+                </div>
+
+                <div class="note">
+                    <img src="https://scontent.flim28-1.fna.fbcdn.net/v/t39.30808-6/443819905_984899532998903_8296162074533095555_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=WiqHwF6FDD8Q7kNvwGu4Nmh&_nc_oc=AdmwCdsRJ3_glH9setHaCi2M7_GMFOPiKlcLA0oErtDOBpL2t1fB-s4_zse2Teety3Q&_nc_zt=23&_nc_ht=scontent.flim28-1.fna&_nc_gid=33f9sWu75vWfx9cP1aa9uA&oh=00_AfesGOcAx-i2qGRaK6EuArOGRcfDtS7DoV5OjX_Zf9XmbQ&oe=690C45A5" class="note-pusheen" alt="pusheen">
+                    <strong>🎀 Verificación:</strong><br>
+                    2(3) + 1 = 7 ✓<br>
+                    3 - 1 = 2 ✓
+                </div>
+            </div>
+
+            <div class="pusheen-decoration">
+                <img src="https://scontent.flim28-1.fna.fbcdn.net/v/t39.30808-6/443819905_984899532998903_8296162074533095555_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=WiqHwF6FDD8Q7kNvwGu4Nmh&_nc_oc=AdmwCdsRJ3_glH9setHaCi2M7_GMFOPiKlcLA0oErtDOBpL2t1fB-s4_zse2Teety3Q&_nc_zt=23&_nc_ht=scontent.flim28-1.fna&_nc_gid=33f9sWu75vWfx9cP1aa9uA&oh=00_AfesGOcAx-i2qGRaK6EuArOGRcfDtS7DoV5OjX_Zf9XmbQ&oe=690C45A5" class="pusheen-img" alt="Pusheen">
+                <span style="font-size: 2.5em;">✨</span>
+            </div>
+
+            <div class="theory-box">
+                <img src="https://scontent.flim28-1.fna.fbcdn.net/v/t39.30808-6/443819905_984899532998903_8296162074533095555_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=WiqHwF6FDD8Q7kNvwGu4Nmh&_nc_oc=AdmwCdsRJ3_glH9setHaCi2M7_GMFOPiKlcLA0oErtDOBpL2t1fB-s4_zse2Teety3Q&_nc_zt=23&_nc_ht=scontent.flim28-1.fna&_nc_gid=33f9sWu75vWfx9cP1aa9uA&oh=00_AfesGOcAx-i2qGRaK6EuArOGRcfDtS7DoV5OjX_Zf9XmbQ&oe=690C45A5" class="theory-box-pusheen" alt="pusheen">
+                <h3>🌸 Método de Igualación</h3>
+                <p>Este método consiste en despejar la misma variable de ambas ecuaciones e igualar las expresiones.</p>
+                
+                <p><strong>Pasos:</strong></p>
+                <ol>
+                    <li>Despeja la misma variable de ambas ecuaciones</li>
+                    <li>Iguala las dos expresiones obtenidas</li>
+                    <li>Resuelve la ecuación resultante</li>
+                    <li>Sustituye el valor encontrado para hallar la otra variable</li>
+                </ol>
+            </div>
+            <div class="example-box">
+                <img src="https://scontent.flim28-1.fna.fbcdn.net/v/t39.30808-6/443819905_984899532998903_8296162074533095555_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=WiqHwF6FDD8Q7kNvwGu4Nmh&_nc_oc=AdmwCdsRJ3_glH9setHaCi2M7_GMFOPiKlcLA0oErtDOBpL2t1fB-s4_zse2Teety3Q&_nc_zt=23&_nc_ht=scontent.flim28-1.fna&_nc_gid=33f9sWu75vWfx9cP1aa9uA&oh=00_AfesGOcAx-i2qGRaK6EuArOGRcfDtS7DoV5OjX_Zf9XmbQ&oe=690C45A5" class="example-box-pusheen" alt="pusheen">
+                <h3>✨ Ejemplo Resuelto - Método de Igualación</h3>
+                <p><strong>Resolver:</strong></p>
+                <div class="formula">
+                    3x + 2y = 12<br>
+                    2x + y = 7
+                </div>
+
+                <div class="step">
+                    <span class="step-number">Paso 1:</span> Despejamos y de ambas ecuaciones<br>
+                    De la primera: 2y = 12 - 3x → y = (12 - 3x)/2<br>
+                    De la segunda: y = 7 - 2x
+                </div>
+
+                <div class="step">
+                    <span class="step-number">Paso 2:</span> Igualamos<br>
+                    (12 - 3x)/2 = 7 - 2x
+                </div>
+
+                <div class="step">
+                    <span class="step-number">Paso 3:</span> Resolvemos<br>
+                    12 - 3x = 2(7 - 2x)<br>
+                    12 - 3x = 14 - 4x<br>
+                    4x - 3x = 14 - 12<br>
+                    x = 2
+                </div>
+
+                <div class="step">
+                    <span class="step-number">Paso 4:</span> Sustituimos x = 2<br>
+                    y = 7 - 2(2)<br>
+                    y = 7 - 4<br>
+                    y = 3
+                </div>
+
+                <div class="step">
+                    <span class="step-number">✅ Solución:</span> x = 2, y = 3
+                </div>
+            </div>
+
+            <div class="pusheen-decoration">
+                <img src="https://scontent.flim28-1.fna.fbcdn.net/v/t39.30808-6/443819905_984899532998903_8296162074533095555_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=WiqHwF6FDD8Q7kNvwGu4Nmh&_nc_oc=AdmwCdsRJ3_glH9setHaCi2M7_GMFOPiKlcLA0oErtDOBpL2t1fB-s4_zse2Teety3Q&_nc_zt=23&_nc_ht=scontent.flim28-1.fna&_nc_gid=33f9sWu75vWfx9cP1aa9uA&oh=00_AfesGOcAx-i2qGRaK6EuArOGRcfDtS7DoV5OjX_Zf9XmbQ&oe=690C45A5" class="pusheen-img" alt="Pusheen">
+                <span style="font-size: 2.5em;">💕</span>
+                <img src="https://scontent.flim28-1.fna.fbcdn.net/v/t39.30808-6/443819905_984899532998903_8296162074533095555_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=WiqHwF6FDD8Q7kNvwGu4Nmh&_nc_oc=AdmwCdsRJ3_glH9setHaCi2M7_GMFOPiKlcLA0oErtDOBpL2t1fB-s4_zse2Teety3Q&_nc_zt=23&_nc_ht=scontent.flim28-1.fna&_nc_gid=33f9sWu75vWfx9cP1aa9uA&oh=00_AfesGOcAx-i2qGRaK6EuArOGRcfDtS7DoV5OjX_Zf9XmbQ&oe=690C45A5" class="pusheen-img" alt="Pusheen">
+            </div>
+
+            <div class="theory-box">
+                <img src="https://scontent.flim28-1.fna.fbcdn.net/v/t39.30808-6/443819905_984899532998903_8296162074533095555_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=WiqHwF6FDD8Q7kNvwGu4Nmh&_nc_oc=AdmwCdsRJ3_glH9setHaCi2M7_GMFOPiKlcLA0oErtDOBpL2t1fB-s4_zse2Teety3Q&_nc_zt=23&_nc_ht=scontent.flim28-1.fna&_nc_gid=33f9sWu75vWfx9cP1aa9uA&oh=00_AfesGOcAx-i2qGRaK6EuArOGRcfDtS7DoV5OjX_Zf9XmbQ&oe=690C45A5" class="theory-box-pusheen" alt="pusheen">
+                <h3>💖 Método de Reducción (Eliminación)</h3>
+                <p>Este método consiste en multiplicar las ecuaciones por números adecuados para que al sumarlas o restarlas, se elimine una variable.</p>
+                
+                <p><strong>Pasos:</strong></p>
+                <ol>
+                    <li>Multiplica una o ambas ecuaciones por números que hagan iguales los coeficientes de una variable</li>
+                    <li>Suma o resta las ecuaciones para eliminar esa variable</li>
+                    <li>Resuelve la ecuación de una variable resultante</li>
+                    <li>Sustituye el valor encontrado para hallar la otra variable</li>
+                </ol>
+            </div>
+
+            <div class="example-box">
+                <img src="https://scontent.flim28-1.fna.fbcdn.net/v/t39.30808-6/443819905_984899532998903_8296162074533095555_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=WiqHwF6FDD8Q7kNvwGu4Nmh&_nc_oc=AdmwCdsRJ3_glH9setHaCi2M7_GMFOPiKlcLA0oErtDOBpL2t1fB-s4_zse2Teety3Q&_nc_zt=23&_nc_ht=scontent.flim28-1.fna&_nc_gid=33f9sWu75vWfx9cP1aa9uA&oh=00_AfesGOcAx-i2qGRaK6EuArOGRcfDtS7DoV5OjX_Zf9XmbQ&oe=690C45A5" class="example-box-pusheen" alt="pusheen">
+                <h3>✨ Ejemplo Resuelto - Método de Reducción</h3>
+                <p><strong>Resolver:</strong></p>
+                <div class="formula">
+                    4x + 3y = 18<br>
+                    2x - y = 4
+                </div>
+
+                <div class="step">
+                    <span class="step-number">Paso 1:</span> Multiplicamos la segunda ecuación por 3<br>
+                    4x + 3y = 18<br>
+                    6x - 3y = 12
+                </div>
+
+                <div class="step">
+                    <span class="step-number">Paso 2:</span> Sumamos ambas ecuaciones<br>
+                    (4x + 3y) + (6x - 3y) = 18 + 12<br>
+                    10x = 30<br>
+                    x = 3
+                </div>
+
+                <div class="step">
+                    <span class="step-number">Paso 3:</span> Sustituimos x = 3 en 2x - y = 4<br>
+                    2(3) - y = 4<br>
+                    6 - y = 4<br>
+                    y = 2
+                </div>
+
+                <div class="step">
+                    <span class="step-number">✅ Solución:</span> x = 3, y = 2
+                </div>
+            </div>
+
+            <div class="pusheen-decoration">
+                <img src="https://scontent.flim28-1.fna.fbcdn.net/v/t39.30808-6/443819905_984899532998903_8296162074533095555_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=WiqHwF6FDD8Q7kNvwGu4Nmh&_nc_oc=AdmwCdsRJ3_glH9setHaCi2M7_GMFOPiKlcLA0oErtDOBpL2t1fB-s4_zse2Teety3Q&_nc_zt=23&_nc_ht=scontent.flim28-1.fna&_nc_gid=33f9sWu75vWfx9cP1aa9uA&oh=00_AfesGOcAx-i2qGRaK6EuArOGRcfDtS7DoV5OjX_Zf9XmbQ&oe=690C45A5" class="pusheen-img" alt="Pusheen">
+                <span style="font-size: 2.5em;">✨💕</span>
+            </div>
+        </div>
+
+        <!-- SECCIÓN 2: OPERACIONES CON MATRICES -->
+        <div id="matrices" class="section">
+            <h2>
+                <img src="https://scontent.flim28-1.fna.fbcdn.net/v/t39.30808-6/443819905_984899532998903_8296162074533095555_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=WiqHwF6FDD8Q7kNvwGu4Nmh&_nc_oc=AdmwCdsRJ3_glH9setHaCi2M7_GMFOPiKlcLA0oErtDOBpL2t1fB-s4_zse2Teety3Q&_nc_zt=23&_nc_ht=scontent.flim28-1.fna&_nc_gid=33f9sWu75vWfx9cP1aa9uA&oh=00_AfesGOcAx-i2qGRaK6EuArOGRcfDtS7DoV5OjX_Zf9XmbQ&oe=690C45A5" class="h2-pusheen" alt="pusheen">
+                🎀 Operaciones con Matrices
+            </h2>
+            
+            <div class="theory-box">
+                <img src="https://scontent.flim28-1.fna.fbcdn.net/v/t39.30808-6/443819905_984899532998903_8296162074533095555_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=WiqHwF6FDD8Q7kNvwGu4Nmh&_nc_oc=AdmwCdsRJ3_glH9setHaCi2M7_GMFOPiKlcLA0oErtDOBpL2t1fB-s4_zse2Teety3Q&_nc_zt=23&_nc_ht=scontent.flim28-1.fna&_nc_gid=33f9sWu75vWfx9cP1aa9uA&oh=00_AfesGOcAx-i2qGRaK6EuArOGRcfDtS7DoV5OjX_Zf9XmbQ&oe=690C45A5" class="theory-box-pusheen" alt="pusheen">
+                <h3>📖 ¿Qué es una Matriz?</h3>
+                <p>Una matriz es un arreglo rectangular de números organizados en filas y columnas. Se representa con letras mayúsculas.</p>
+                
+                <div class="formula">
+                    Matriz A de orden 2×3:<br><br>
+                    A = [ a₁₁  a₁₂  a₁₃ ]<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;[ a₂₁  a₂₂  a₂₃ ]
+                </div>
+
+                <div class="note">
+                    <img src="https://scontent.flim28-1.fna.fbcdn.net/v/t39.30808-6/443819905_984899532998903_8296162074533095555_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=WiqHwF6FDD8Q7kNvwGu4Nmh&_nc_oc=AdmwCdsRJ3_glH9setHaCi2M7_GMFOPiKlcLA0oErtDOBpL2t1fB-s4_zse2Teety3Q&_nc_zt=23&_nc_ht=scontent.flim28-1.fna&_nc_gid=33f9sWu75vWfx9cP1aa9uA&oh=00_AfesGOcAx-i2qGRaK6EuArOGRcfDtS7DoV5OjX_Zf9XmbQ&oe=690C45A5" class="note-pusheen" alt="pusheen">
+                    <strong>💡 Nota de Pusheen:</strong> El orden de una matriz se escribe como filas × columnas. ¡Es como una cuadrícula de gatitos! 🐱
+                </div>
+            </div>
+
+            <div class="theory-box">
+                <img src="https://scontent.flim28-1.fna.fbcdn.net/v/t39.30808-6/443819905_984899532998903_8296162074533095555_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=WiqHwF6FDD8Q7kNvwGu4Nmh&_nc_oc=AdmwCdsRJ3_glH9setHaCi2M7_GMFOPiKlcLA0oErtDOBpL2t1fB-s4_zse2Teety3Q&_nc_zt=23&_nc_ht=scontent.flim28-1.fna&_nc_gid=33f9sWu75vWfx9cP1aa9uA&oh=00_AfesGOcAx-i2qGRaK6EuArOGRcfDtS7DoV5OjX_Zf9XmbQ&oe=690C45A5" class="theory-box-pusheen" alt="pusheen">
+                <h3>➕ Suma y Resta de Matrices</h3>
+                <p>Dos matrices se pueden sumar o restar solo si tienen el mismo orden. La operación se realiza elemento a elemento.</p>
+                
+                <div class="formula">
+                    Si A = [aᵢⱼ] y B = [bᵢⱼ]<br>
+                    Entonces: A ± B = [aᵢⱼ ± bᵢⱼ]
+                </div>
+            </div>
+
+            <div class="example-box">
+                <img src="https://scontent.flim28-1.fna.fbcdn.net/v/t39.30808-6/443819905_984899532998903_8296162074533095555_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=WiqHwF6FDD8Q7kNvwGu4Nmh&_nc_oc=AdmwCdsRJ3_glH9setHaCi2M7_GMFOPiKlcLA0oErtDOBpL2t1fB-s4_zse2Teety3Q&_nc_zt=23&_nc_ht=scontent.flim28-1.fna&_nc_gid=33f9sWu75vWfx9cP1aa9uA&oh=00_AfesGOcAx-i2qGRaK6EuArOGRcfDtS7DoV5OjX_Zf9XmbQ&oe=690C45A5" class="example-box-pusheen" alt="pusheen">
+                <h3>✨ Ejemplo Resuelto - Suma de Matrices</h3>
+                
+                <div class="step">
+                    <span class="step-number">Datos:</span><br>
+                    A = [ 2   3 ]  &nbsp;&nbsp;  B = [ 1   4 ]<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;[ 1   5 ]  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 2   3 ]
+                </div>
+
+                <div class="step">
+                    <span class="step-number">Solución:</span><br>
+                    A + B = [ 2+1   3+4 ]<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 1+2   5+3 ]
+                </div>
+
+                <div class="step">
+                    <span class="step-number">✅ Resultado:</span><br>
+                    A + B = [ 3   7 ]<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 3   8 ]
+                </div>
+            </div>
+
+            <div class="pusheen-decoration">
+                <img src="https://scontent.flim28-1.fna.fbcdn.net/v/t39.30808-6/443819905_984899532998903_8296162074533095555_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=WiqHwF6FDD8Q7kNvwGu4Nmh&_nc_oc=AdmwCdsRJ3_glH9setHaCi2M7_GMFOPiKlcLA0oErtDOBpL2t1fB-s4_zse2Teety3Q&_nc_zt=23&_nc_ht=scontent.flim28-1.fna&_nc_gid=33f9sWu75vWfx9cP1aa9uA&oh=00_AfesGOcAx-i2qGRaK6EuArOGRcfDtS7DoV5OjX_Zf9XmbQ&oe=690C45A5" class="pusheen-img" alt="Pusheen">
+                <span style="font-size: 2em;">➕</span>
+                <img src="https://scontent.flim28-1.fna.fbcdn.net/v/t39.30808-6/443819905_984899532998903_8296162074533095555_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=WiqHwF6FDD8Q7kNvwGu4Nmh&_nc_oc=AdmwCdsRJ3_glH9setHaCi2M7_GMFOPiKlcLA0oErtDOBpL2t1fB-s4_zse2Teety3Q&_nc_zt=23&_nc_ht=scontent.flim28-1.fna&_nc_gid=33f9sWu75vWfx9cP1aa9uA&oh=00_AfesGOcAx-i2qGRaK6EuArOGRcfDtS7DoV5OjX_Zf9XmbQ&oe=690C45A5" class="pusheen-img" alt="Pusheen">
+                <span style="font-size: 2em;">=</span>
+                <span style="font-size: 3em;">💕</span>
+            </div>
+
+            <div class="theory-box">
+                <img src="https://scontent.flim28-1.fna.fbcdn.net/v/t39.30808-6/443819905_984899532998903_8296162074533095555_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=WiqHwF6FDD8Q7kNvwGu4Nmh&_nc_oc=AdmwCdsRJ3_glH9setHaCi2M7_GMFOPiKlcLA0oErtDOBpL2t1fB-s4_zse2Teety3Q&_nc_zt=23&_nc_ht=scontent.flim28-1.fna&_nc_gid=33f9sWu75vWfx9cP1aa9uA&oh=00_AfesGOcAx-i2qGRaK6EuArOGRcfDtS7DoV5OjX_Zf9XmbQ&oe=690C45A5" class="theory-box-pusheen" alt="pusheen">
+                <h3>✖️ Multiplicación de una Matriz por un Escalar</h3>
+                <p>Para multiplicar una matriz por un número (escalar), multiplicamos cada elemento de la matriz por ese número.</p>
+                
+                <div class="formula">
+                    k · A = [k · aᵢⱼ]
+                </div>
+            </div>
+
+            <div class="example-box">
+                <img src="https://scontent.flim28-1.fna.fbcdn.net/v/t39.30808-6/443819905_984899532998903_8296162074533095555_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=WiqHwF6FDD8Q7kNvwGu4Nmh&_nc_oc=AdmwCdsRJ3_glH9setHaCi2M7_GMFOPiKlcLA0oErtDOBpL2t1fB-s4_zse2Teety3Q&_nc_zt=23&_nc_ht=scontent.flim28-1.fna&_nc_gid=33f9sWu75vWfx9cP1aa9uA&oh=00_AfesGOcAx-i2qGRaK6EuArOGRcfDtS7DoV5OjX_Zf9XmbQ&oe=690C45A5" class="example-box-pusheen" alt="pusheen">
+                <h3>✨ Ejemplo Resuelto - Producto por Escalar</h3>
+                
+                <div class="step">
+                    <span class="step-number">Datos:</span><br>
+                    A = [ 2   -1 ]  &nbsp;&nbsp;  k = 3<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;[ 4    3 ]
+                </div>
+
+                <div class="step">
+                    <span class="step-number">Solución:</span><br>
+                    3 · A = [ 3(2)   3(-1) ]<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 3(4)    3(3) ]
+                </div>
+
+                <div class="step">
+                    <span class="step-number">✅ Resultado:</span><br>
+                    3 · A = [ 6   -3 ]<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 12   9 ]
+                </div>
+            </div>
+
+            <div class="theory-box">
+                <img src="https://scontent.flim28-1.fna.fbcdn.net/v/t39.30808-6/443819905_984899532998903_8296162074533095555_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=WiqHwF6FDD8Q7kNvwGu4Nmh&_nc_oc=AdmwCdsRJ3_glH9setHaCi2M7_GMFOPiKlcLA0oErtDOBpL2t1fB-s4_zse2Teety3Q&_nc_zt=23&_nc_ht=scontent.flim28-1.fna&_nc_gid=33f9sWu75vWfx9cP1aa9uA&oh=00_AfesGOcAx-i2qGRaK6EuArOGRcfDtS7DoV5OjX_Zf9XmbQ&oe=690C45A5" class="theory-box-pusheen" alt="pusheen">
+                <h3>🔢 Multiplicación de Matrices</h3>
+                <p>Dos matrices A y B se pueden multiplicar si el número de columnas de A es igual al número de filas de B.</p>
+                
+                <div class="formula">
+                    Si A es m×n y B es n×p<br>
+                    Entonces: C = A · B es m×p<br><br>
+                    cᵢⱼ = Σ(aᵢₖ · bₖⱼ)
+                </div>
+
+                <div class="note">
+                    <img src="https://scontent.flim28-1.fna.fbcdn.net/v/t39.30808-6/443819905_984899532998903_8296162074533095555_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=WiqHwF6FDD8Q7kNvwGu4Nmh&_nc_oc=AdmwCdsRJ3_glH9setHaCi2M7_GMFOPiKlcLA0oErtDOBpL2t1fB-s4_zse2Teety3Q&_nc_zt=23&_nc_ht=scontent.flim28-1.fna&_nc_gid=33f9sWu75vWfx9cP1aa9uA&oh=00_AfesGOcAx-i2qGRaK6EuArOGRcfDtS7DoV5OjX_Zf9XmbQ&oe=690C45A5" class="note-pusheen" alt="pusheen">
+                    <strong>💡 Nota de Pusheen:</strong> Cada elemento de C se obtiene multiplicando fila por columna. ¡Es como hacer sumas de productos! 🐱✨
+                </div>
+            </div>
+
+            <div class="example-box">
+                <img src="https://scontent.flim28-1.fna.fbcdn.net/v/t39.30808-6/443819905_984899532998903_8296162074533095555_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=WiqHwF6FDD8Q7kNvwGu4Nmh&_nc_oc=AdmwCdsRJ3_glH9setHaCi2M7_GMFOPiKlcLA0oErtDOBpL2t1fB-s4_zse2Teety3Q&_nc_zt=23&_nc_ht=scontent.flim28-1.fna&_nc_gid=33f9sWu75vWfx9cP1aa9uA&oh=00_AfesGOcAx-i2qGRaK6EuArOGRcfDtS7DoV5OjX_Zf9XmbQ&oe=690C45A5" class="example-box-pusheen" alt="pusheen">
+                <h3>✨ Ejemplo Resuelto - Multiplicación de Matrices</h3>
+                
+                <div class="step">
+                    <span class="step-number">Datos:</span><br>
+                    A = [ 1   2 ]  &nbsp;&nbsp;  B = [ 3   1 ]<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;[ 3   4 ]  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 2   5 ]
+                </div>
+
+                <div class="step">
+                    <span class="step-number">Paso 1:</span> Elemento c₁₁ (fila 1 × columna 1)<br>
+                    c₁₁ = 1(3) + 2(2) = 3 + 4 = 7
+                </div>
+
+                <div class="step">
+                    <span class="step-number">Paso 2:</span> Elemento c₁₂ (fila 1 × columna 2)<br>
+                    c₁₂ = 1(1) + 2(5) = 1 + 10 = 11
+                </div>
+
+                <div class="step">
+                    <span class="step-number">Paso 3:</span> Elemento c₂₁ (fila 2 × columna 1)<br>
+                    c₂₁ = 3(3) + 4(2) = 9 + 8 = 17
+                </div>
+
+                <div class="step">
+                    <span class="step-number">Paso 4:</span> Elemento c₂₂ (fila 2 × columna 2)<br>
+                    c₂₂ = 3(1) + 4(5) = 3 + 20 = 23
+                </div>
+
+                <div class="step">
+                    <span class="step-number">✅ Resultado:</span><br>
+                    A · B = [ 7    11 ]<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 17   23 ]
+                </div>
+            </div>
+
+            <div class="theory-box">
+                <img src="https://scontent.flim28-1.fna.fbcdn.net/v/t39.30808-6/443819905_984899532998903_8296162074533095555_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=WiqHwF6FDD8Q7kNvwGu4Nmh&_nc_oc=AdmwCdsRJ3_glH9setHaCi2M7_GMFOPiKlcLA0oErtDOBpL2t1fB-s4_zse2Teety3Q&_nc_zt=23&_nc_ht=scontent.flim28-1.fna&_nc_gid=33f9sWu75vWfx9cP1aa9uA&oh=00_AfesGOcAx-i2qGRaK6EuArOGRcfDtS7DoV5OjX_Zf9XmbQ&oe=690C45A5" class="theory-box-pusheen" alt="pusheen">
+                <h3>🔄 Matriz Identidad y Matriz Inversa</h3>
+                <p><strong>Matriz Identidad (I):</strong> Es una matriz cuadrada con unos en la diagonal principal y ceros en el resto.</p>
+                
+                <div class="formula">
+                    I₂ = [ 1   0 ]  &nbsp;&nbsp;  I₃ = [ 1   0   0 ]<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 0   1 ]  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 0   1   0 ]<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 0   0   1 ]
+                </div>
+
+                <p><strong>Matriz Inversa (A⁻¹):</strong> Es la matriz que al multiplicarla por A da la matriz identidad.</p>
+                
+                <div class="formula">
+                    A · A⁻¹ = I
+                </div>
+
+                <div class="note">
+                    <img src="https://scontent.flim28-1.fna.fbcdn.net/v/t39.30808-6/443819905_984899532998903_8296162074533095555_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=WiqHwF6FDD8Q7kNvwGu4Nmh&_nc_oc=AdmwCdsRJ3_glH9setHaCi2M7_GMFOPiKlcLA0oErtDOBpL2t1fB-s4_zse2Teety3Q&_nc_zt=23&_nc_ht=scontent.flim28-1.fna&_nc_gid=33f9sWu75vWfx9cP1aa9uA&oh=00_AfesGOcAx-i2qGRaK6EuArOGRcfDtS7DoV5OjX_Zf9XmbQ&oe=690C45A5" class="note-pusheen" alt="pusheen">
+                    <strong>💡 Nota de Pusheen:</strong> No todas las matrices tienen inversa. Solo las matrices cuadradas con determinante ≠ 0 tienen inversa. ¡Miau! 🐱
+                </div>
+            </div>
+
+            <div class="example-box">
+                <img src="https://scontent.flim28-1.fna.fbcdn.net/v/t39.30808-6/443819905_984899532998903_8296162074533095555_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=WiqHwF6FDD8Q7kNvwGu4Nmh&_nc_oc=AdmwCdsRJ3_glH9setHaCi2M7_GMFOPiKlcLA0oErtDOBpL2t1fB-s4_zse2Teety3Q&_nc_zt=23&_nc_ht=scontent.flim28-1.fna&_nc_gid=33f9sWu75vWfx9cP1aa9uA&oh=00_AfesGOcAx-i2qGRaK6EuArOGRcfDtS7DoV5OjX_Zf9XmbQ&oe=690C45A5" class="example-box-pusheen" alt="pusheen">
+                <h3>✨ Ejemplo - Matriz Inversa 2×2</h3>
+                <p>Para una matriz 2×2, la fórmula de la inversa es:</p>
+                
+                <div class="formula">
+                    Si A = [ a   b ]<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ c   d ]<br><br>
+                    A⁻¹ = (1/det(A)) · [  d   -b ]<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ -c    a ]<br><br>
+                    donde det(A) = ad - bc
+                </div>
+
+                <div class="step">
+                    <span class="step-number">Ejemplo:</span> Encontrar A⁻¹<br>
+                    A = [ 2   1 ]<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;[ 3   4 ]
+                </div>
+
+                <div class="step">
+                    <span class="step-number">Paso 1:</span> Calculamos det(A)<br>
+                    det(A) = (2)(4) - (1)(3) = 8 - 3 = 5
+                </div>
+
+                <div class="step">
+                    <span class="step-number">Paso 2:</span> Aplicamos la fórmula<br>
+                    A⁻¹ = (1/5) · [  4   -1 ]<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ -3    2 ]
+                </div>
+
+                <div class="step">
+                    <span class="step-number">✅ Resultado:</span><br>
+                    A⁻¹ = [ 4/5   -1/5 ]<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ -3/5   2/5 ]
+                </div>
+            </div>
+
+            <div class="pusheen-decoration">
+                <img src="https://scontent.flim28-1.fna.fbcdn.net/v/t39.30808-6/443819905_984899532998903_8296162074533095555_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=WiqHwF6FDD8Q7kNvwGu4Nmh&_nc_oc=AdmwCdsRJ3_glH9setHaCi2M7_GMFOPiKlcLA0oErtDOBpL2t1fB-s4_zse2Teety3Q&_nc_zt=23&_nc_ht=scontent.flim28-1.fna&_nc_gid=33f9sWu75vWfx9cP1aa9uA&oh=00_AfesGOcAx-i2qGRaK6EuArOGRcfDtS7DoV5OjX_Zf9XmbQ&oe=690C45A5" class="pusheen-img" alt="Pusheen">
+                <span style="font-size: 2.5em;">💕✨</span>
+            </div>
+        </div>
+
+        <!-- SECCIÓN 3: MÉTODO DE CRAMER -->
+        <div id="cramer" class="section">
+            <h2>
+                <img src="https://scontent.flim28-1.fna.fbcdn.net/v/t39.30808-6/443819905_984899532998903_8296162074533095555_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=WiqHwF6FDD8Q7kNvwGu4Nmh&_nc_oc=AdmwCdsRJ3_glH9setHaCi2M7_GMFOPiKlcLA0oErtDOBpL2t1fB-s4_zse2Teety3Q&_nc_zt=23&_nc_ht=scontent.flim28-1.fna&_nc_gid=33f9sWu75vWfx9cP1aa9uA&oh=00_AfesGOcAx-i2qGRaK6EuArOGRcfDtS7DoV5OjX_Zf9XmbQ&oe=690C45A5" class="h2-pusheen" alt="pusheen">
+                🎀 Método de Cramer
+            </h2>
+            
+            <div class="theory-box">
+                <img src="https://i.imgur.com/9bgXqWp.png" class="theory-box-pusheen" alt="pusheen">
+                <h3>📖 ¿Qué es el Método de Cramer?</h3>
+                <p>El método de Cramer es una técnica para resolver sistemas de ecuaciones lineales usando determinantes. Es muy útil cuando el sistema tiene una solución única.</p>
+                
+                <div class="note">
+                    <img src="https://scontent.flim28-1.fna.fbcdn.net/v/t39.30808-6/443819905_984899532998903_8296162074533095555_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=WiqHwF6FDD8Q7kNvwGu4Nmh&_nc_oc=AdmwCdsRJ3_glH9setHaCi2M7_GMFOPiKlcLA0oErtDOBpL2t1fB-s4_zse2Teety3Q&_nc_zt=23&_nc_ht=scontent.flim28-1.fna&_nc_gid=33f9sWu75vWfx9cP1aa9uA&oh=00_AfesGOcAx-i2qGRaK6EuArOGRcfDtS7DoV5OjX_Zf9XmbQ&oe=690C45A5" class="note-pusheen" alt="pusheen">
+                    <strong>💡 Nota de Pusheen:</strong> ¡Este método usa determinantes! Primero necesitamos saber calcularlos. ¡Miau! 🐱
+                </div>
+            </div>
+
+            <div class="theory-box">
+                <img src="https://scontent.flim28-1.fna.fbcdn.net/v/t39.30808-6/443819905_984899532998903_8296162074533095555_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=WiqHwF6FDD8Q7kNvwGu4Nmh&_nc_oc=AdmwCdsRJ3_glH9setHaCi2M7_GMFOPiKlcLA0oErtDOBpL2t1fB-s4_zse2Teety3Q&_nc_zt=23&_nc_ht=scontent.flim28-1.fna&_nc_gid=33f9sWu75vWfx9cP1aa9uA&oh=00_AfesGOcAx-i2qGRaK6EuArOGRcfDtS7DoV5OjX_Zf9XmbQ&oe=690C45A5" class="theory-box-pusheen" alt="pusheen">
+                <h3>🔢 Determinantes</h3>
+                <p><strong>Determinante de una matriz 2×2:</strong></p>
+                
+                <div class="formula">
+                    A = [ a   b ]<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;[ c   d ]<br><br>
+                    det(A) = |A| = ad - bc
+                </div>
+
+                <p><strong>Determinante de una matriz 3×3 (Regla de Sarrus):</strong></p>
+                
+                <div class="formula">
+                    A = [ a   b   c ]<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;[ d   e   f ]<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;[ g   h   i ]<br><br>
+                    det(A) = aei + bfg + cdh - ceg - afh - bdi
+                </div>
+            </div>
+            <div class="example-box">
+                <img src="https://scontent.flim28-1.fna.fbcdn.net/v/t39.30808-6/443819905_984899532998903_8296162074533095555_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=WiqHwF6FDD8Q7kNvwGu4Nmh&_nc_oc=AdmwCdsRJ3_glH9setHaCi2M7_GMFOPiKlcLA0oErtDOBpL2t1fB-s4_zse2Teety3Q&_nc_zt=23&_nc_ht=scontent.flim28-1.fna&_nc_gid=33f9sWu75vWfx9cP1aa9uA&oh=00_AfesGOcAx-i2qGRaK6EuArOGRcfDtS7DoV5OjX_Zf9XmbQ&oe=690C45A5" class="example-box-pusheen" alt="pusheen">
+                <h3>✨ Ejemplo - Determinante 2×2</h3>
+                
+                <div class="step">
+                    <span class="step-number">Datos:</span><br>
+                    A = [ 3   2 ]<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;[ 1   4 ]
+                </div>
+
+                <div class="step">
+                    <span class="step-number">Solución:</span><br>
+                    det(A) = (3)(4) - (2)(1)<br>
+                    det(A) = 12 - 2<br>
+                    det(A) = 10
+                </div>
+
+                <div class="step">
+                    <span class="step-number">✅ Resultado:</span> det(A) = 10
+                </div>
+            </div>
+
+            <div class="pusheen-decoration">
+                <img src="https://scontent.flim28-1.fna.fbcdn.net/v/t39.30808-6/443819905_984899532998903_8296162074533095555_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=WiqHwF6FDD8Q7kNvwGu4Nmh&_nc_oc=AdmwCdsRJ3_glH9setHaCi2M7_GMFOPiKlcLA0oErtDOBpL2t1fB-s4_zse2Teety3Q&_nc_zt=23&_nc_ht=scontent.flim28-1.fna&_nc_gid=33f9sWu75vWfx9cP1aa9uA&oh=00_AfesGOcAx-i2qGRaK6EuArOGRcfDtS7DoV5OjX_Zf9XmbQ&oe=690C45A5" class="pusheen-img" alt="Pusheen">
+                <span style="font-size: 2.5em;">🔢</span>
+            </div>
+
+            <div class="example-box">
+                <img src="https://scontent.flim28-1.fna.fbcdn.net/v/t39.30808-6/443819905_984899532998903_8296162074533095555_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=WiqHwF6FDD8Q7kNvwGu4Nmh&_nc_oc=AdmwCdsRJ3_glH9setHaCi2M7_GMFOPiKlcLA0oErtDOBpL2t1fB-s4_zse2Teety3Q&_nc_zt=23&_nc_ht=scontent.flim28-1.fna&_nc_gid=33f9sWu75vWfx9cP1aa9uA&oh=00_AfesGOcAx-i2qGRaK6EuArOGRcfDtS7DoV5OjX_Zf9XmbQ&oe=690C45A5" class="example-box-pusheen" alt="pusheen">
+                <h3>✨ Ejemplo - Determinante 3×3</h3>
+                
+                <div class="step">
+                    <span class="step-number">Datos:</span><br>
+                    A = [ 2   1   3 ]<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;[ 1   2   1 ]<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;[ 3   1   2 ]
+                </div>
+
+                <div class="step">
+                    <span class="step-number">Paso 1:</span> Productos positivos (diagonal principal y paralelas)<br>
+                    (+) = (2)(2)(2) + (1)(1)(3) + (3)(1)(1)<br>
+                    (+) = 8 + 3 + 3 = 14
+                </div>
+
+                <div class="step">
+                    <span class="step-number">Paso 2:</span> Productos negativos (diagonal secundaria y paralelas)<br>
+                    (-) = (3)(2)(3) + (2)(1)(1) + (1)(1)(2)<br>
+                    (-) = 18 + 2 + 2 = 22
+                </div>
+
+                <div class="step">
+                    <span class="step-number">Paso 3:</span> Determinante<br>
+                    det(A) = 14 - 22 = -8
+                </div>
+
+                <div class="step">
+                    <span class="step-number">✅ Resultado:</span> det(A) = -8
+                </div>
+            </div>
+
+            <div class="theory-box">
+                <img src="https://scontent.flim28-1.fna.fbcdn.net/v/t39.30808-6/443819905_984899532998903_8296162074533095555_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=WiqHwF6FDD8Q7kNvwGu4Nmh&_nc_oc=AdmwCdsRJ3_glH9setHaCi2M7_GMFOPiKlcLA0oErtDOBpL2t1fB-s4_zse2Teety3Q&_nc_zt=23&_nc_ht=scontent.flim28-1.fna&_nc_gid=33f9sWu75vWfx9cP1aa9uA&oh=00_AfesGOcAx-i2qGRaK6EuArOGRcfDtS7DoV5OjX_Zf9XmbQ&oe=690C45A5" class="theory-box-pusheen" alt="pusheen">
+                <h3>🌟 Fórmula del Método de Cramer</h3>
+                <p>Para un sistema de ecuaciones lineales AX = B, donde A es la matriz de coeficientes:</p>
+                
+                <div class="formula">
+                    x₁ = det(A₁) / det(A)<br>
+                    x₂ = det(A₂) / det(A)<br>
+                    x₃ = det(A₃) / det(A)<br>
+                    ...<br><br>
+                    donde Aᵢ es la matriz A con la columna i reemplazada por B
+                </div>
+
+                <div class="note">
+                    <img src="https://scontent.flim28-1.fna.fbcdn.net/v/t39.30808-6/443819905_984899532998903_8296162074533095555_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=WiqHwF6FDD8Q7kNvwGu4Nmh&_nc_oc=AdmwCdsRJ3_glH9setHaCi2M7_GMFOPiKlcLA0oErtDOBpL2t1fB-s4_zse2Teety3Q&_nc_zt=23&_nc_ht=scontent.flim28-1.fna&_nc_gid=33f9sWu75vWfx9cP1aa9uA&oh=00_AfesGOcAx-i2qGRaK6EuArOGRcfDtS7DoV5OjX_Zf9XmbQ&oe=690C45A5" class="note-pusheen" alt="pusheen">
+                    <strong>⚠️ Importante:</strong> El método solo funciona si det(A) ≠ 0. Si det(A) = 0, el sistema no tiene solución única.
+                </div>
+            </div>
+
+            <div class="example-box">
+                <img src="https://scontent.flim28-1.fna.fbcdn.net/v/t39.30808-6/443819905_984899532998903_8296162074533095555_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=WiqHwF6FDD8Q7kNvwGu4Nmh&_nc_oc=AdmwCdsRJ3_glH9setHaCi2M7_GMFOPiKlcLA0oErtDOBpL2t1fB-s4_zse2Teety3Q&_nc_zt=23&_nc_ht=scontent.flim28-1.fna&_nc_gid=33f9sWu75vWfx9cP1aa9uA&oh=00_AfesGOcAx-i2qGRaK6EuArOGRcfDtS7DoV5OjX_Zf9XmbQ&oe=690C45A5" class="example-box-pusheen" alt="pusheen">
+                <h3>✨ Ejemplo Completo - Sistema 2×2 con Cramer</h3>
+                <p><strong>Resolver:</strong></p>
+                <div class="formula">
+                    2x + 3y = 8<br>
+                    x - y = 1
+                </div>
+
+                <div class="step">
+                    <span class="step-number">Paso 1:</span> Matriz de coeficientes A y vector B<br>
+                    A = [ 2    3 ]  &nbsp;&nbsp;  B = [ 8 ]<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;[ 1   -1 ]  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 1 ]
+                </div>
+
+                <div class="step">
+                    <span class="step-number">Paso 2:</span> Calculamos det(A)<br>
+                    det(A) = (2)(-1) - (3)(1)<br>
+                    det(A) = -2 - 3 = -5
+                </div>
+
+                <div class="step">
+                    <span class="step-number">Paso 3:</span> Matriz A₁ (reemplazamos columna 1 con B)<br>
+                    A₁ = [ 8    3 ]<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 1   -1 ]<br><br>
+                    det(A₁) = (8)(-1) - (3)(1) = -8 - 3 = -11
+                </div>
+
+                <div class="step">
+                    <span class="step-number">Paso 4:</span> Matriz A₂ (reemplazamos columna 2 con B)<br>
+                    A₂ = [ 2   8 ]<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 1   1 ]<br><br>
+                    det(A₂) = (2)(1) - (8)(1) = 2 - 8 = -6
+                </div>
+
+                <div class="step">
+                    <span class="step-number">Paso 5:</span> Aplicamos las fórmulas<br>
+                    x = det(A₁) / det(A) = -11 / -5 = 11/5 = 2.2<br>
+                    y = det(A₂) / det(A) = -6 / -5 = 6/5 = 1.2
+                </div>
+
+                <div class="step">
+                    <span class="step-number">✅ Solución:</span> x = 2.2, y = 1.2
+                </div>
+
+                <div class="note">
+                    <img src="https://scontent.flim28-1.fna.fbcdn.net/v/t39.30808-6/443819905_984899532998903_8296162074533095555_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=WiqHwF6FDD8Q7kNvwGu4Nmh&_nc_oc=AdmwCdsRJ3_glH9setHaCi2M7_GMFOPiKlcLA0oErtDOBpL2t1fB-s4_zse2Teety3Q&_nc_zt=23&_nc_ht=scontent.flim28-1.fna&_nc_gid=33f9sWu75vWfx9cP1aa9uA&oh=00_AfesGOcAx-i2qGRaK6EuArOGRcfDtS7DoV5OjX_Zf9XmbQ&oe=690C45A5" class="note-pusheen" alt="pusheen">
+                    <strong>🎀 Verificación:</strong><br>
+                    2(2.2) + 3(1.2) = 4.4 + 3.6 = 8 ✓<br>
+                    2.2 - 1.2 = 1 ✓
+                </div>
+            </div>
+
+            <div class="pusheen-decoration">
+                <img src="https://scontent.flim28-1.fna.fbcdn.net/v/t39.30808-6/443819905_984899532998903_8296162074533095555_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=WiqHwF6FDD8Q7kNvwGu4Nmh&_nc_oc=AdmwCdsRJ3_glH9setHaCi2M7_GMFOPiKlcLA0oErtDOBpL2t1fB-s4_zse2Teety3Q&_nc_zt=23&_nc_ht=scontent.flim28-1.fna&_nc_gid=33f9sWu75vWfx9cP1aa9uA&oh=00_AfesGOcAx-i2qGRaK6EuArOGRcfDtS7DoV5OjX_Zf9XmbQ&oe=690C45A5" class="pusheen-img" alt="Pusheen">
+                <span style="font-size: 2.5em;">✨💕</span>
+                <img src="https://scontent.flim28-1.fna.fbcdn.net/v/t39.30808-6/443819905_984899532998903_8296162074533095555_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=WiqHwF6FDD8Q7kNvwGu4Nmh&_nc_oc=AdmwCdsRJ3_glH9setHaCi2M7_GMFOPiKlcLA0oErtDOBpL2t1fB-s4_zse2Teety3Q&_nc_zt=23&_nc_ht=scontent.flim28-1.fna&_nc_gid=33f9sWu75vWfx9cP1aa9uA&oh=00_AfesGOcAx-i2qGRaK6EuArOGRcfDtS7DoV5OjX_Zf9XmbQ&oe=690C45A5" class="pusheen-img" alt="Pusheen">
+            </div>
+
+            <div class="example-box">
+                <img src="https://scontent.flim28-1.fna.fbcdn.net/v/t39.30808-6/443819905_984899532998903_8296162074533095555_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=WiqHwF6FDD8Q7kNvwGu4Nmh&_nc_oc=AdmwCdsRJ3_glH9setHaCi2M7_GMFOPiKlcLA0oErtDOBpL2t1fB-s4_zse2Teety3Q&_nc_zt=23&_nc_ht=scontent.flim28-1.fna&_nc_gid=33f9sWu75vWfx9cP1aa9uA&oh=00_AfesGOcAx-i2qGRaK6EuArOGRcfDtS7DoV5OjX_Zf9XmbQ&oe=690C45A5" class="example-box-pusheen" alt="pusheen">
+                <h3>✨ Ejemplo Completo - Sistema 3×3 con Cramer</h3>
+                <p><strong>Resolver:</strong></p>
+                <div class="formula">
+                    x + 2y + z = 6<br>
+                    2x + y - z = 1<br>
+                    x - y + 2z = 5
+                </div>
+
+                <div class="step">
+                    <span class="step-number">Paso 1:</span> Matriz A y vector B<br>
+                    A = [ 1   2   1 ]  &nbsp;&nbsp;  B = [ 6 ]<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;[ 2   1  -1 ]  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 1 ]<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;[ 1  -1   2 ]  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 5 ]
+                </div>
+
+                <div class="step">
+                    <span class="step-number">Paso 2:</span> Calculamos det(A)<br>
+                    (+) = (1)(1)(2) + (2)(-1)(1) + (1)(2)(-1) = 2 - 2 - 2 = -2<br>
+                    (-) = (1)(1)(1) + (1)(-1)(2) + (2)(2)(-1) = 1 - 2 - 4 = -5<br>
+                    det(A) = -2 - (-5) = 3
+                </div>
+
+                <div class="step">
+                    <span class="step-number">Paso 3:</span> Calculamos det(A₁)<br>
+                    A₁ = [ 6   2   1 ]<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 1   1  -1 ]<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 5  -1   2 ]<br><br>
+                    (+) = (6)(1)(2) + (2)(-1)(5) + (1)(1)(-1) = 12 - 10 - 1 = 1<br>
+                    (-) = (1)(1)(5) + (6)(-1)(-1) + (2)(1)(2) = 5 + 6 + 4 = 15<br>
+                    det(A₁) = 1 - 15 = -14
+                </div>
+
+                <div class="step">
+                    <span class="step-number">Paso 4:</span> Calculamos det(A₂)<br>
+                    A₂ = [ 1   6   1 ]<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 2   1  -1 ]<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 1   5   2 ]<br><br>
+                    (+) = (1)(1)(2) + (6)(-1)(1) + (1)(2)(5) = 2 - 6 + 10 = 6<br>
+                    (-) = (1)(1)(1) + (1)(-1)(5) + (6)(2)(2) = 1 - 5 + 24 = 20<br>
+                    det(A₂) = 6 - 20 = -14
+                </div>
+
+                <div class="step">
+                    <span class="step-number">Paso 5:</span> Calculamos det(A₃)<br>
+                    A₃ = [ 1   2   6 ]<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 2   1   1 ]<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ 1  -1   5 ]<br><br>
+                    (+) = (1)(1)(5) + (2)(1)(1) + (6)(2)(-1) = 5 + 2 - 12 = -5<br>
+                    (-) = (6)(1)(1) + (1)(1)(-1) + (2)(2)(5) = 6 - 1 + 20 = 25<br>
+                    det(A₃) = -5 - 25 = -30
+                </div>
+
+                <div class="step">
+                    <span class="step-number">Paso 6:</span> Aplicamos las fórmulas<br>
+                    x = det(A₁) / det(A) = -14 / 3<br>
+                    y = det(A₂) / det(A) = -14 / 3<br>
+                    z = det(A₃) / det(A) = -30 / 3 = -10
+                </div>
+
+                <div class="step">
+                    <span class="step-number">✅ Solución:</span> x = -14/3, y = -14/3, z = -10
+                </div>
+            </div>
+
+            <div class="pusheen-decoration">
+                <img src="https://scontent.flim28-1.fna.fbcdn.net/v/t39.30808-6/443819905_984899532998903_8296162074533095555_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=WiqHwF6FDD8Q7kNvwGu4Nmh&_nc_oc=AdmwCdsRJ3_glH9setHaCi2M7_GMFOPiKlcLA0oErtDOBpL2t1fB-s4_zse2Teety3Q&_nc_zt=23&_nc_ht=scontent.flim28-1.fna&_nc_gid=33f9sWu75vWfx9cP1aa9uA&oh=00_AfesGOcAx-i2qGRaK6EuArOGRcfDtS7DoV5OjX_Zf9XmbQ&oe=690C45A5" class="pusheen-img" alt="Pusheen">
+                <span style="font-size: 2.5em;">✨💕</span>
+            </div>
+        </div>
+
+        <!-- SECCIÓN 4: PROBLEMAS APLICADOS -->
+        <div id="problemas" class="section">
+            <h2>
+                <img src="https://scontent.flim28-1.fna.fbcdn.net/v/t39.30808-6/443819905_984899532998903_8296162074533095555_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=WiqHwF6FDD8Q7kNvwGu4Nmh&_nc_oc=AdmwCdsRJ3_glH9setHaCi2M7_GMFOPiKlcLA0oErtDOBpL2t1fB-s4_zse2Teety3Q&_nc_zt=23&_nc_ht=scontent.flim28-1.fna&_nc_gid=33f9sWu75vWfx9cP1aa9uA&oh=00_AfesGOcAx-i2qGRaK6EuArOGRcfDtS7DoV5OjX_Zf9XmbQ&oe=690C45A5" class="h2-pusheen" alt="pusheen">
+                🎀 Resolución de Problemas Aplicados
+            </h2>
+            
+            <div class="theory-box">
+                <img src="https://scontent.flim28-1.fna.fbcdn.net/v/t39.30808-6/443819905_984899532998903_8296162074533095555_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=WiqHwF6FDD8Q7kNvwGu4Nmh&_nc_oc=AdmwCdsRJ3_glH9setHaCi2M7_GMFOPiKlcLA0oErtDOBpL2t1fB-s4_zse2Teety3Q&_nc_zt=23&_nc_ht=scontent.flim28-1.fna&_nc_gid=33f9sWu75vWfx9cP1aa9uA&oh=00_AfesGOcAx-i2qGRaK6EuArOGRcfDtS7DoV5OjX_Zf9XmbQ&oe=690C45A5" class="theory-box-pusheen" alt="pusheen">
+                <h3>📖 Cómo plantear problemas con sistemas de ecuaciones</h3>
+                <p><strong>Pasos para resolver problemas:</strong></p>
+                <ol>
+                    <li><strong>Leer cuidadosamente</strong> el problema</li>
+                    <li><strong>Identificar las incógnitas</strong> (¿qué buscamos?)</li>
+                    <li><strong>Asignar variables</strong> a las incógnitas</li>
+                    <li><strong>Traducir</strong> las relaciones del problema a ecuaciones</li>
+                    <li><strong>Resolver</strong> el sistema de ecuaciones</li>
+                    <li><strong>Verificar</strong> que la solución tenga sentido</li>
+                </ol>
+
+                <div class="note">
+                    <img src="https://scontent.flim28-1.fna.fbcdn.net/v/t39.30808-6/443819905_984899532998903_8296162074533095555_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=WiqHwF6FDD8Q7kNvwGu4Nmh&_nc_oc=AdmwCdsRJ3_glH9setHaCi2M7_GMFOPiKlcLA0oErtDOBpL2t1fB-s4_zse2Teety3Q&_nc_zt=23&_nc_ht=scontent.flim28-1.fna&_nc_gid=33f9sWu75vWfx9cP1aa9uA&oh=00_AfesGOcAx-i2qGRaK6EuArOGRcfDtS7DoV5OjX_Zf9XmbQ&oe=690C45A5" class="note-pusheen" alt="pusheen">
+                    <strong>💡 Nota de Pusheen:</strong> ¡Lo más importante es traducir bien las palabras a matemáticas! 🐱📝
+                </div>
+            </div>
+
+            <div class="example-box">
+                <img src="https://scontent.flim28-1.fna.fbcdn.net/v/t39.30808-6/443819905_984899532998903_8296162074533095555_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=WiqHwF6FDD8Q7kNvwGu4Nmh&_nc_oc=AdmwCdsRJ3_glH9setHaCi2M7_GMFOPiKlcLA0oErtDOBpL2t1fB-s4_zse2Teety3Q&_nc_zt=23&_nc_ht=scontent.flim28-1.fna&_nc_gid=33f9sWu75vWfx9cP1aa9uA&oh=00_AfesGOcAx-i2qGRaK6EuArOGRcfDtS7DoV5OjX_Zf9XmbQ&oe=690C45A5" class="example-box-pusheen" alt="pusheen">
+                <h3>✨ Problema 1: Números</h3>
+                <p><strong>Enunciado:</strong> La suma de dos números es 50 y su diferencia es 10. ¿Cuáles son los números?</p>
+
+                <div class="step">
+                    <span class="step-number">Paso 1:</span> Identificar incógnitas<br>
+                    - Primer número: x<br>
+                    - Segundo número: y
+                </div>
+
+                <div class="step">
+                    <span class="step-number">Paso 2:</span> Plantear ecuaciones<br>
+                    - "La suma es 50": x + y = 50<br>
+                    - "Su diferencia es 10": x - y = 10
+                </div>
+
+                <div class="step">
+                    <span class="step-number">Paso 3:</span> Resolver por reducción (sumar ambas)<br>
+                    (x + y) + (x - y) = 50 + 10<br>
+                    2x = 60<br>
+                    x = 30
+                </div>
+
+                <div class="step">
+                    <span class="step-number">Paso 4:</span> Sustituir para hallar y<br>
+                    30 + y = 50<br>
+                    y = 20
+                </div>
+
+                <div class="step">
+                    <span class="step-number">✅ Respuesta:</span> Los números son 30 y 20
+                </div>
+
+                <div class="note">
+                    <img src="https://scontent.flim28-1.fna.fbcdn.net/v/t39.30808-6/443819905_984899532998903_8296162074533095555_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=WiqHwF6FDD8Q7kNvwGu4Nmh&_nc_oc=AdmwCdsRJ3_glH9setHaCi2M7_GMFOPiKlcLA0oErtDOBpL2t1fB-s4_zse2Teety3Q&_nc_zt=23&_nc_ht=scontent.flim28-1.fna&_nc_gid=33f9sWu75vWfx9cP1aa9uA&oh=00_AfesGOcAx-i2qGRaK6EuArOGRcfDtS7DoV5OjX_Zf9XmbQ&oe=690C45A5" class="note-pusheen" alt="pusheen">
+                    <strong>🎀 Verificación:</strong><br>
+                    30 + 20 = 50 ✓<br>
+                    30 - 20 = 10 ✓
+                </div>
+            </div>
+
+            <div class="pusheen-decoration">
+                <img src="https://scontent.flim28-1.fna.fbcdn.net/v/t39.30808-6/443819905_984899532998903_8296162074533095555_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=WiqHwF6FDD8Q7kNvwGu4Nmh&_nc_oc=AdmwCdsRJ3_glH9setHaCi2M7_GMFOPiKlcLA0oErtDOBpL2t1fB-s4_zse2Teety3Q&_nc_zt=23&_nc_ht=scontent.flim28-1.fna&_nc_gid=33f9sWu75vWfx9cP1aa9uA&oh=00_AfesGOcAx-i2qGRaK6EuArOGRcfDtS7DoV5OjX_Zf9XmbQ&oe=690C45A5" class="pusheen-img" alt="Pusheen">
+                <span style="font-size: 2.5em;">🔢</span>
+            </div>
+
+            <div class="example-box">
+                <img src="https://scontent.flim28-1.fna.fbcdn.net/v/t39.30808-6/443819905_984899532998903_8296162074533095555_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=WiqHwF6FDD8Q7kNvwGu4Nmh&_nc_oc=AdmwCdsRJ3_glH9setHaCi2M7_GMFOPiKlcLA0oErtDOBpL2t1fB-s4_zse2Teety3Q&_nc_zt=23&_nc_ht=scontent.flim28-1.fna&_nc_gid=33f9sWu75vWfx9cP1aa9uA&oh=00_AfesGOcAx-i2qGRaK6EuArOGRcfDtS7DoV5OjX_Zf9XmbQ&oe=690C45A5" class="example-box-pusheen" alt="pusheen">
+                <h3>✨ Problema 2: Edades</h3>
+                <p><strong>Enunciado:</strong> María tiene el doble de edad que Ana. Dentro de 5 años, la suma de sus edades será 40 años. ¿Qué edad tiene cada una ahora?</p>
+
+                <div class="step">
+                    <span class="step-number">Paso 1:</span> Identificar incógnitas<br>
+                    - Edad actual de María: M<br>
+                    - Edad actual de Ana: A
+                </div>
+
+                <div class="step">
+                    <span class="step-number">Paso 2:</span> Plantear ecuaciones<br>
+                    - "María tiene el doble de edad que Ana": M = 2A<br>
+                    - "Dentro de 5 años la suma será 40": (M+5) + (A+5) = 40
+                </div>
+
+                <div class="step">
+                    <span class="step-number">Paso 3:</span> Simplificar la segunda ecuación<br>
+                    M + A + 10 = 40<br>
+                    M + A = 30
+                </div>
+
+                <div class="step">
+                    <span class="step-number">Paso 4:</span> Sustituir M = 2A en M + A = 30<br>
+                    2A + A = 30<br>
+                    3A = 30<br>
+                    A = 10
+                </div>
+
+                <div class="step">
+                    <span class="step-number">Paso 5:</span> Calcular M<br>
+                    M = 2(10) = 20
+                </div>
+
+                <div class="step">
+                    <span class="step-number">✅ Respuesta:</span> María tiene 20 años y Ana tiene 10 años
+                </div>
+
+                <div class="note">
+                    <img src="https://scontent.flim28-1.fna.fbcdn.net/v/t39.30808-6/443819905_984899532998903_8296162074533095555_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=WiqHwF6FDD8Q7kNvwGu4Nmh&_nc_oc=AdmwCdsRJ3_glH9setHaCi2M7_GMFOPiKlcLA0oErtDOBpL2t1fB-s4_zse2Teety3Q&_nc_zt=23&_nc_ht=scontent.flim28-1.fna&_nc_gid=33f9sWu75vWfx9cP1aa9uA&oh=00_AfesGOcAx-i2qGRaK6EuArOGRcfDtS7DoV5OjX_Zf9XmbQ&oe=690C45A5" class="note-pusheen" alt="pusheen">
+                    <strong>🎀 Verificación:</strong><br>
+                    20 = 2(10) ✓<br>
+                    (20+5) + (10+5) = 25 + 15 = 40 ✓
+                </div>
+            </div>
+
+            <div class="pusheen-decoration">
+                <img src="https://scontent.flim28-1.fna.fbcdn.net/v/t39.30808-6/443819905_984899532998903_8296162074533095555_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=WiqHwF6FDD8Q7kNvwGu4Nmh&_nc_oc=AdmwCdsRJ3_glH9setHaCi2M7_GMFOPiKlcLA0oErtDOBpL2t1fB-s4_zse2Teety3Q&_nc_zt=23&_nc_ht=scontent.flim28-1.fna&_nc_gid=33f9sWu75vWfx9cP1aa9uA&oh=00_AfesGOcAx-i2qGRaK6EuArOGRcfDtS7DoV5OjX_Zf9XmbQ&oe=690C45A5" class="pusheen-img" alt="Pusheen">
+                <span style="font-size: 2.5em;">👧</span>
+                <img src="https://scontent.flim28-1.fna.fbcdn.net/v/t39.30808-6/443819905_984899532998903_8296162074533095555_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=WiqHwF6FDD8Q7kNvwGu4Nmh&_nc_oc=AdmwCdsRJ3_glH9setHaCi2M7_GMFOPiKlcLA0oErtDOBpL2t1fB-s4_zse2Teety3Q&_nc_zt=23&_nc_ht=scontent.flim28-1.fna&_nc_gid=33f9sWu75vWfx9cP1aa9uA&oh=00_AfesGOcAx-i2qGRaK6EuArOGRcfDtS7DoV5OjX_Zf9XmbQ&oe=690C45A5" class="pusheen-img" alt="Pusheen">
+            </div>
+
+            <div class="example-box">
+                <img src="https://scontent.flim28-1.fna.fbcdn.net/v/t39.30808-6/443819905_984899532998903_8296162074533095555_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=WiqHwF6FDD8Q7kNvwGu4Nmh&_nc_oc=AdmwCdsRJ3_glH9setHaCi2M7_GMFOPiKlcLA0oErtDOBpL2t1fB-s4_zse2Teety3Q&_nc_zt=23&_nc_ht=scontent.flim28-1.fna&_nc_gid=33f9sWu75vWfx9cP1aa9uA&oh=00_AfesGOcAx-i2qGRaK6EuArOGRcfDtS7DoV5OjX_Zf9XmbQ&oe=690C45A5" class="example-box-pusheen" alt="pusheen">
+                <h3>✨ Problema 3: Dinero y Precios</h3>
+                <p><strong>Enunciado:</strong> En una tienda, 3 cuadernos y 2 lapiceros cuestan $15. Si 2 cuadernos y 4 lapiceros cuestan $14, ¿cuánto cuesta cada artículo?</p>
+
+                <div class="step">
+                    <span class="step-number">Paso 1:</span> Identificar incógnitas<br>
+                    - Precio de un cuaderno: c<br>
+                    - Precio de un lapicero: l
+                </div>
+
+                <div class="step">
+                    <span class="step-number">Paso 2:</span> Plantear ecuaciones<br>
+                    - "3 cuadernos y 2 lapiceros cuestan $15": 3c + 2l = 15<br>
+                    - "2 cuadernos y 4 lapiceros cuestan $14": 2c + 4l = 14
+                </div>
+
+                <div class="step">
+                    <span class="step-number">Paso 3:</span> Resolver por reducción<br>
+                    Multiplicamos la primera ecuación por 2:<br>
+                    6c + 4l = 30<br>
+                    2c + 4l = 14<br><br>
+                    Restamos:<br>
+                    4c = 16<br>
+                    c = 4
+                </div>
+
+                <div class="step">
+                    <span class="step-number">Paso 4:</span> Sustituir c = 4<br>
+                    3(4) + 2l = 15<br>
+                    12 + 2l = 15<br>
+                    2l = 3<br>
+                    l = 1.5
+                </div>
+
+                <div class="step">
+                    <span class="step-number">✅ Respuesta:</span> Cada cuaderno cuesta $4 y cada lapicero cuesta $1.50
+                </div>
+
+                <div class="note">
+                    <img src="https://scontent.flim28-1.fna.fbcdn.net/v/t39.30808-6/443819905_984899532998903_8296162074533095555_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=WiqHwF6FDD8Q7kNvwGu4Nmh&_nc_oc=AdmwCdsRJ3_glH9setHaCi2M7_GMFOPiKlcLA0oErtDOBpL2t1fB-s4_zse2Teety3Q&_nc_zt=23&_nc_ht=scontent.flim28-1.fna&_nc_gid=33f9sWu75vWfx9cP1aa9uA&oh=00_AfesGOcAx-i2qGRaK6EuArOGRcfDtS7DoV5OjX_Zf9XmbQ&oe=690C45A5" class="note-pusheen" alt="pusheen">
+                    <strong>🎀 Verificación:</strong><br>
+                    3(4) + 2(1.5) = 12 + 3 = 15 ✓<br>
+                    2(4) + 4(1.5) = 8 + 6 = 14 ✓
+                </div>
+            </div>
+
+            <div class="pusheen-decoration">
+                <img src="https://scontent.flim28-1.fna.fbcdn.net/v/t39.30808-6/443819905_984899532998903_8296162074533095555_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=WiqHwF6FDD8Q7kNvwGu4Nmh&_nc_oc=AdmwCdsRJ3_glH9setHaCi2M7_GMFOPiKlcLA0oErtDOBpL2t1fB-s4_zse2Teety3Q&_nc_zt=23&_nc_ht=scontent.flim28-1.fna&_nc_gid=33f9sWu75vWfx9cP1aa9uA&oh=00_AfesGOcAx-i2qGRaK6EuArOGRcfDtS7DoV5OjX_Zf9XmbQ&oe=690C45A5" class="pusheen-img" alt="Pusheen">
+                <span style="font-size: 2.5em;">💰📝</span>
+            </div>
+            <div class="example-box">
+                <img src="https://scontent.flim28-1.fna.fbcdn.net/v/t39.30808-6/443819905_984899532998903_8296162074533095555_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=WiqHwF6FDD8Q7kNvwGu4Nmh&_nc_oc=AdmwCdsRJ3_glH9setHaCi2M7_GMFOPiKlcLA0oErtDOBpL2t1fB-s4_zse2Teety3Q&_nc_zt=23&_nc_ht=scontent.flim28-1.fna&_nc_gid=33f9sWu75vWfx9cP1aa9uA&oh=00_AfesGOcAx-i2qGRaK6EuArOGRcfDtS7DoV5OjX_Zf9XmbQ&oe=690C45A5" class="example-box-pusheen" alt="pusheen">
+                <h3>✨ Problema 4: Mezclas</h3>
+                <p><strong>Enunciado:</strong> Se mezclan dos tipos de café: uno de $12 por kg y otro de $18 por kg. Si queremos obtener 10 kg de mezcla a $15 por kg, ¿cuántos kg de cada tipo debemos usar?</p>
+
+                <div class="step">
+                    <span class="step-number">Paso 1:</span> Identificar incógnitas<br>
+                    - Kg de café de $12: x<br>
+                    - Kg de café de $18: y
+                </div>
+
+                <div class="step">
+                    <span class="step-number">Paso 2:</span> Plantear ecuaciones<br>
+                    - "Total 10 kg": x + y = 10<br>
+                    - "Precio de la mezcla": 12x + 18y = 15(10) = 150
+                </div>
+
+                <div class="step">
+                    <span class="step-number">Paso 3:</span> De la primera: y = 10 - x
+                </div>
+
+                <div class="step">
+                    <span class="step-number">Paso 4:</span> Sustituir en la segunda<br>
+                    12x + 18(10 - x) = 150<br>
+                    12x + 180 - 18x = 150<br>
+                    -6x = -30<br>
+                    x = 5
+                </div>
+
+                <div class="step">
+                    <span class="step-number">Paso 5:</span> Calcular y<br>
+                    y = 10 - 5 = 5
+                </div>
+
+                <div class="step">
+                    <span class="step-number">✅ Respuesta:</span> Se necesitan 5 kg de café de $12 y 5 kg de café de $18
+                </div>
+            </div>
+
+            <div class="pusheen-decoration">
+                <img src="https://scontent.flim28-1.fna.fbcdn.net/v/t39.30808-6/443819905_984899532998903_8296162074533095555_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=WiqHwF6FDD8Q7kNvwGu4Nmh&_nc_oc=AdmwCdsRJ3_glH9setHaCi2M7_GMFOPiKlcLA0oErtDOBpL2t1fB-s4_zse2Teety3Q&_nc_zt=23&_nc_ht=scontent.flim28-1.fna&_nc_gid=33f9sWu75vWfx9cP1aa9uA&oh=00_AfesGOcAx-i2qGRaK6EuArOGRcfDtS7DoV5OjX_Zf9XmbQ&oe=690C45A5" class="pusheen-img" alt="Pusheen">
+                <span style="font-size: 2.5em;">☕</span>
+                <img src="https://scontent.flim28-1.fna.fbcdn.net/v/t39.30808-6/443819905_984899532998903_8296162074533095555_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=WiqHwF6FDD8Q7kNvwGu4Nmh&_nc_oc=AdmwCdsRJ3_glH9setHaCi2M7_GMFOPiKlcLA0oErtDOBpL2t1fB-s4_zse2Teety3Q&_nc_zt=23&_nc_ht=scontent.flim28-1.fna&_nc_gid=33f9sWu75vWfx9cP1aa9uA&oh=00_AfesGOcAx-i2qGRaK6EuArOGRcfDtS7DoV5OjX_Zf9XmbQ&oe=690C45A5" class="pusheen-img" alt="Pusheen">
+            </div>
+
+            <div class="example-box">
+                <img src="https://scontent.flim28-1.fna.fbcdn.net/v/t39.30808-6/443819905_984899532998903_8296162074533095555_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=WiqHwF6FDD8Q7kNvwGu4Nmh&_nc_oc=AdmwCdsRJ3_glH9setHaCi2M7_GMFOPiKlcLA0oErtDOBpL2t1fB-s4_zse2Teety3Q&_nc_zt=23&_nc_ht=scontent.flim28-1.fna&_nc_gid=33f9sWu75vWfx9cP1aa9uA&oh=00_AfesGOcAx-i2qGRaK6EuArOGRcfDtS7DoV5OjX_Zf9XmbQ&oe=690C45A5" class="example-box-pusheen" alt="pusheen">
+                <h3>✨ Problema 5: Geometría</h3>
+                <p><strong>Enunciado:</strong> Un rectángulo tiene un perímetro de 40 cm. Si el largo es 4 cm más que el doble del ancho, ¿cuáles son sus dimensiones?</p>
+
+                <div class="step">
+                    <span class="step-number">Paso 1:</span> Identificar incógnitas<br>
+                    - Ancho del rectángulo: a<br>
+                    - Largo del rectángulo: l
+                </div>
+
+                <div class="step">
+                    <span class="step-number">Paso 2:</span> Plantear ecuaciones<br>
+                    - "Perímetro = 40": 2l + 2a = 40 → l + a = 20<br>
+                    - "El largo es 4 más que el doble del ancho": l = 2a + 4
+                </div>
+
+                <div class="step">
+                    <span class="step-number">Paso 3:</span> Sustituir l = 2a + 4 en l + a = 20<br>
+                    (2a + 4) + a = 20<br>
+                    3a + 4 = 20<br>
+                    3a = 16<br>
+                    a = 16/3 ≈ 5.33 cm
+                </div>
+
+                <div class="step">
+                    <span class="step-number">Paso 4:</span> Calcular l<br>
+                    l = 2(16/3) + 4 = 32/3 + 12/3 = 44/3 ≈ 14.67 cm
+                </div>
+
+                <div class="step">
+                    <span class="step-number">✅ Respuesta:</span> Ancho = 5.33 cm, Largo = 14.67 cm
+                </div>
+            </div>
+
+            <div class="pusheen-decoration">
+                <img src="https://scontent.flim28-1.fna.fbcdn.net/v/t39.30808-6/443819905_984899532998903_8296162074533095555_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=WiqHwF6FDD8Q7kNvwGu4Nmh&_nc_oc=AdmwCdsRJ3_glH9setHaCi2M7_GMFOPiKlcLA0oErtDOBpL2t1fB-s4_zse2Teety3Q&_nc_zt=23&_nc_ht=scontent.flim28-1.fna&_nc_gid=33f9sWu75vWfx9cP1aa9uA&oh=00_AfesGOcAx-i2qGRaK6EuArOGRcfDtS7DoV5OjX_Zf9XmbQ&oe=690C45A5" class="pusheen-img" alt="Pusheen">
+                <span style="font-size: 2.5em;">💕✨</span>
+            </div>
+        </div>
+
+        <!-- SECCIÓN 5: PRÁCTICA INTERACTIVA -->
+        <div id="practica" class="section">
+            <h2>
+                <img src="https://scontent.flim28-1.fna.fbcdn.net/v/t39.30808-6/443819905_984899532998903_8296162074533095555_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=WiqHwF6FDD8Q7kNvwGu4Nmh&_nc_oc=AdmwCdsRJ3_glH9setHaCi2M7_GMFOPiKlcLA0oErtDOBpL2t1fB-s4_zse2Teety3Q&_nc_zt=23&_nc_ht=scontent.flim28-1.fna&_nc_gid=33f9sWu75vWfx9cP1aa9uA&oh=00_AfesGOcAx-i2qGRaK6EuArOGRcfDtS7DoV5OjX_Zf9XmbQ&oe=690C45A5" class="h2-pusheen" alt="pusheen">
+                🎯 ¡Hora de Practicar!
+            </h2>
+            
+            <div class="pusheen-decoration">
+                <img src="https://scontent.flim28-1.fna.fbcdn.net/v/t39.30808-6/443819905_984899532998903_8296162074533095555_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=WiqHwF6FDD8Q7kNvwGu4Nmh&_nc_oc=AdmwCdsRJ3_glH9setHaCi2M7_GMFOPiKlcLA0oErtDOBpL2t1fB-s4_zse2Teety3Q&_nc_zt=23&_nc_ht=scontent.flim28-1.fna&_nc_gid=33f9sWu75vWfx9cP1aa9uA&oh=00_AfesGOcAx-i2qGRaK6EuArOGRcfDtS7DoV5OjX_Zf9XmbQ&oe=690C45A5" class="pusheen-img" alt="Pusheen">
+                <span style="font-size: 2.5em;">📚✨</span>
+                <img src="https://scontent.flim28-1.fna.fbcdn.net/v/t39.30808-6/443819905_984899532998903_8296162074533095555_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=WiqHwF6FDD8Q7kNvwGu4Nmh&_nc_oc=AdmwCdsRJ3_glH9setHaCi2M7_GMFOPiKlcLA0oErtDOBpL2t1fB-s4_zse2Teety3Q&_nc_zt=23&_nc_ht=scontent.flim28-1.fna&_nc_gid=33f9sWu75vWfx9cP1aa9uA&oh=00_AfesGOcAx-i2qGRaK6EuArOGRcfDtS7DoV5OjX_Zf9XmbQ&oe=690C45A5" class="pusheen-img" alt="Pusheen">
+            </div>
+
+            <!-- PRÁCTICA 1: MÉTODOS ALGEBRAICOS -->
+            <div class="practice-container">
+                <img src="https://scontent.flim28-1.fna.fbcdn.net/v/t39.30808-6/443819905_984899532998903_8296162074533095555_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=WiqHwF6FDD8Q7kNvwGu4Nmh&_nc_oc=AdmwCdsRJ3_glH9setHaCi2M7_GMFOPiKlcLA0oErtDOBpL2t1fB-s4_zse2Teety3Q&_nc_zt=23&_nc_ht=scontent.flim28-1.fna&_nc_gid=33f9sWu75vWfx9cP1aa9uA&oh=00_AfesGOcAx-i2qGRaK6EuArOGRcfDtS7DoV5OjX_Zf9XmbQ&oe=690C45A5" class="practice-pusheen" alt="pusheen">
+                <h3 style="text-align: center; color: #ff69b4; margin-bottom: 20px;">🌸 Práctica 1: Métodos Algebraicos</h3>
+                
+                <div class="question">
+                    <h4>Pregunta 1: ¿Cuál es la solución del siguiente sistema usando sustitución?</h4>
+                    <div class="formula" style="font-size: 1em;">
+                        x + y = 10<br>
+                        x - y = 2
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 'p1q1')">
+                        <input type="radio" name="p1q1" value="a">
+                        a) x = 5, y = 5
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'p1q1')">
+                        <input type="radio" name="p1q1" value="b">
+                        b) x = 6, y = 4
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'p1q1')">
+                        <input type="radio" name="p1q1" value="c">
+                        c) x = 7, y = 3
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'p1q1')">
+                        <input type="radio" name="p1q1" value="d">
+                        d) x = 8, y = 2
+                    </div>
+                </div>
+
+                <div class="question">
+                    <h4>Pregunta 2: Usando el método de reducción, ¿cuál es el valor de x en el sistema?</h4>
+                    <div class="formula" style="font-size: 1em;">
+                        2x + 3y = 13<br>
+                        x + y = 5
+                    </div>
+                    
+                    <div class="option" onclick="selectOption(this, 'p1q2')">
+                        <input type="radio" name="p1q2" value="a">
+                        a) x = 1
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'p1q2')">
+                        <input type="radio" name="p1q2" value="b">
+                        b) x = 2
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'p1q2')">
+                        <input type="radio" name="p1q2" value="c">
+                        c) x = 3
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'p1q2')">
+                        <input type="radio" name="p1q2" value="d">
+                        d) x = 4
+                    </div>
+                </div>
+
+                <div class="question">
+                    <h4>Pregunta 3: ¿Qué método es más conveniente cuando los coeficientes de una variable son opuestos?</h4>
+                    
+                    <div class="option" onclick="selectOption(this, 'p1q3')">
+                        <input type="radio" name="p1q3" value="a">
+                        a) Método de sustitución
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'p1q3')">
+                        <input type="radio" name="p1q3" value="b">
+                        b) Método de igualación
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'p1q3')">
+                        <input type="radio" name="p1q3" value="c">
+                        c) Método de reducción
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'p1q3')">
+                        <input type="radio" name="p1q3" value="d">
+                        d) Todos son igual de convenientes
+                    </div>
+                </div>
+
+                <button class="check-btn" onclick="checkAnswers('practice1')">Verificar Respuestas 🎀</button>
+                <div id="result-practice1" class="result"></div>
+            </div>
+
+            <div class="pusheen-decoration">
+                <img src="https://scontent.flim28-1.fna.fbcdn.net/v/t39.30808-6/443819905_984899532998903_8296162074533095555_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=WiqHwF6FDD8Q7kNvwGu4Nmh&_nc_oc=AdmwCdsRJ3_glH9setHaCi2M7_GMFOPiKlcLA0oErtDOBpL2t1fB-s4_zse2Teety3Q&_nc_zt=23&_nc_ht=scontent.flim28-1.fna&_nc_gid=33f9sWu75vWfx9cP1aa9uA&oh=00_AfesGOcAx-i2qGRaK6EuArOGRcfDtS7DoV5OjX_Zf9XmbQ&oe=690C45A5" class="pusheen-img" alt="Pusheen">
+            </div>
+
+            <!-- PRÁCTICA 2: MATRICES -->
+            <div class="practice-container">
+                <img src="https://scontent.flim28-1.fna.fbcdn.net/v/t39.30808-6/443819905_984899532998903_8296162074533095555_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=WiqHwF6FDD8Q7kNvwGu4Nmh&_nc_oc=AdmwCdsRJ3_glH9setHaCi2M7_GMFOPiKlcLA0oErtDOBpL2t1fB-s4_zse2Teety3Q&_nc_zt=23&_nc_ht=scontent.flim28-1.fna&_nc_gid=33f9sWu75vWfx9cP1aa9uA&oh=00_AfesGOcAx-i2qGRaK6EuArOGRcfDtS7DoV5OjX_Zf9XmbQ&oe=690C45A5" class="practice-pusheen" alt="pusheen">
+                <h3 style="text-align: center; color: #87ceeb; margin-bottom: 20px;">🔢 Práctica 2: Operaciones con Matrices</h3>
+                
+                <div class="question">
+                    <h4>Pregunta 1: Si A = [2 3] y B = [1 4], ¿cuál es A + B?</h4>
+                    <p style="text-align: center;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[1 5]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[2 3]</p>
+                    
+                    <div class="option" onclick="selectOption(this, 'p2q1')">
+                        <input type="radio" name="p2q1" value="a">
+                        a) [3 7; 3 8]
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'p2q1')">
+                        <input type="radio" name="p2q1" value="b">
+                        b) [2 12; 2 15]
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'p2q1')">
+                        <input type="radio" name="p2q1" value="c">
+                        c) [3 8; 3 7]
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'p2q1')">
+                        <input type="radio" name="p2q1" value="d">
+                        d) [1 7; 1 8]
+                    </div>
+                </div>
+
+                <div class="question">
+                    <h4>Pregunta 2: ¿Cuál es el resultado de multiplicar la matriz [2 1] por el escalar 3?</h4>
+                    <p style="text-align: center;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4 3]</p>
+                    
+                    <div class="option" onclick="selectOption(this, 'p2q2')">
+                        <input type="radio" name="p2q2" value="a">
+                        a) [5 4; 7 6]
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'p2q2')">
+                        <input type="radio" name="p2q2" value="b">
+                        b) [6 3; 12 9]
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'p2q2')">
+                        <input type="radio" name="p2q2" value="c">
+                        c) [2 3; 4 9]
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'p2q2')">
+                        <input type="radio" name="p2q2" value="d">
+                        d) [6 1; 12 3]
+                    </div>
+                </div>
+
+                <div class="question">
+                    <h4>Pregunta 3: Para multiplicar dos matrices A y B, ¿qué condición deben cumplir?</h4>
+                    
+                    <div class="option" onclick="selectOption(this, 'p2q3')">
+                        <input type="radio" name="p2q3" value="a">
+                        a) Deben tener el mismo número de filas
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'p2q3')">
+                        <input type="radio" name="p2q3" value="b">
+                        b) El número de columnas de A debe ser igual al número de filas de B
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'p2q3')">
+                        <input type="radio" name="p2q3" value="c">
+                        c) Deben ser matrices cuadradas
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'p2q3')">
+                        <input type="radio" name="p2q3" value="d">
+                        d) Deben tener el mismo orden
+                    </div>
+                </div>
+
+                <button class="check-btn" onclick="checkAnswers('practice2')">Verificar Respuestas 🎀</button>
+                <div id="result-practice2" class="result"></div>
+            </div>
+
+            <div class="pusheen-decoration">
+                <img src="https://i.imgur.com/9bgXqWp.png" class="pusheen-img" alt="Pusheen">
+            </div>
+
+            <!-- PRÁCTICA 3: MÉTODO DE CRAMER -->
+            <div class="practice-container">
+                <img src="https://scontent.flim28-1.fna.fbcdn.net/v/t39.30808-6/443819905_984899532998903_8296162074533095555_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=WiqHwF6FDD8Q7kNvwGu4Nmh&_nc_oc=AdmwCdsRJ3_glH9setHaCi2M7_GMFOPiKlcLA0oErtDOBpL2t1fB-s4_zse2Teety3Q&_nc_zt=23&_nc_ht=scontent.flim28-1.fna&_nc_gid=33f9sWu75vWfx9cP1aa9uA&oh=00_AfesGOcAx-i2qGRaK6EuArOGRcfDtS7DoV5OjX_Zf9XmbQ&oe=690C45A5" class="practice-pusheen" alt="pusheen">
+                <h3 style="text-align: center; color: #ff69b4; margin-bottom: 20px;">✨ Práctica 3: Método de Cramer</h3>
+                
+                <div class="question">
+                    <h4>Pregunta 1: ¿Cuál es el determinante de la matriz [3 2]?</h4>
+                    <p style="text-align: center;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[1 4]</p>
+                    
+                    <div class="option" onclick="selectOption(this, 'p3q1')">
+                        <input type="radio" name="p3q1" value="a">
+                        a) 8
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'p3q1')">
+                        <input type="radio" name="p3q1" value="b">
+                        b) 10
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'p3q1')">
+                        <input type="radio" name="p3q1" value="c">
+                        c) 12
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'p3q1')">
+                        <input type="radio" name="p3q1" value="d">
+                        d) 14
+                    </div>
+                </div>
+
+                <div class="question">
+                    <h4>Pregunta 2: ¿Cuándo NO se puede usar el método de Cramer?</h4>
+                    
+                    <div class="option" onclick="selectOption(this, 'p3q2')">
+                        <input type="radio" name="p3q2" value="a">
+                        a) Cuando el determinante de A es igual a 0
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'p3q2')">
+                        <input type="radio" name="p3q2" value="b">
+                        b) Cuando el sistema tiene 3 variables
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'p3q2')">
+                        <input type="radio" name="p3q2" value="c">
+                        c) Cuando las ecuaciones son complejas
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'p3q2')">
+                        <input type="radio" name="p3q2" value="d">
+                        d) Cuando hay números negativos
+                    </div>
+                </div>
+
+                <div class="question">
+                    <h4>Pregunta 3: En el método de Cramer, ¿qué representa A₁?</h4>
+                    
+                    <div class="option" onclick="selectOption(this, 'p3q3')">
+                        <input type="radio" name="p3q3" value="a">
+                        a) La matriz con la primera fila reemplazada por B
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'p3q3')">
+                        <input type="radio" name="p3q3" value="b">
+                        b) La matriz con la primera columna reemplazada por B
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'p3q3')">
+                        <input type="radio" name="p3q3" value="c">
+                        c) La matriz inversa de A
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'p3q3')">
+                        <input type="radio" name="p3q3" value="d">
+                        d) La matriz transpuesta de A
+                    </div>
+                </div>
+
+                <button class="check-btn" onclick="checkAnswers('practice3')">Verificar Respuestas 🎀</button>
+                <div id="result-practice3" class="result"></div>
+            </div>
+
+            <div class="pusheen-decoration">
+                <img src="https://scontent.flim28-1.fna.fbcdn.net/v/t39.30808-6/443819905_984899532998903_8296162074533095555_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=WiqHwF6FDD8Q7kNvwGu4Nmh&_nc_oc=AdmwCdsRJ3_glH9setHaCi2M7_GMFOPiKlcLA0oErtDOBpL2t1fB-s4_zse2Teety3Q&_nc_zt=23&_nc_ht=scontent.flim28-1.fna&_nc_gid=33f9sWu75vWfx9cP1aa9uA&oh=00_AfesGOcAx-i2qGRaK6EuArOGRcfDtS7DoV5OjX_Zf9XmbQ&oe=690C45A5" class="pusheen-img" alt="Pusheen">
+            </div>
+
+            <!-- PRÁCTICA 4: PROBLEMAS APLICADOS -->
+            <div class="practice-container">
+                <img src="https://scontent.flim28-1.fna.fbcdn.net/v/t39.30808-6/443819905_984899532998903_8296162074533095555_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=WiqHwF6FDD8Q7kNvwGu4Nmh&_nc_oc=AdmwCdsRJ3_glH9setHaCi2M7_GMFOPiKlcLA0oErtDOBpL2t1fB-s4_zse2Teety3Q&_nc_zt=23&_nc_ht=scontent.flim28-1.fna&_nc_gid=33f9sWu75vWfx9cP1aa9uA&oh=00_AfesGOcAx-i2qGRaK6EuArOGRcfDtS7DoV5OjX_Zf9XmbQ&oe=690C45A5" class="practice-pusheen" alt="pusheen">
+                <h3 style="text-align: center; color: #87ceeb; margin-bottom: 20px;">💡 Práctica 4: Problemas Aplicados</h3>
+                
+                <div class="question">
+                    <h4>Pregunta 1: Juan tiene el triple de edad que Pedro. Si la suma de sus edades es 40, ¿cuántos años tiene Juan?</h4>
+                    
+                    <div class="option" onclick="selectOption(this, 'p4q1')">
+                        <input type="radio" name="p4q1" value="a">
+                        a) 20 años
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'p4q1')">
+                        <input type="radio" name="p4q1" value="b">
+                        b) 25 años
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'p4q1')">
+                        <input type="radio" name="p4q1" value="c">
+                        c) 30 años
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'p4q1')">
+                        <input type="radio" name="p4q1" value="d">
+                        d) 35 años
+                    </div>
+                </div>
+
+                <div class="question">
+                    <h4>Pregunta 2: En una tienda, 2 manzanas y 3 naranjas cuestan $8. Si 4 manzanas y 1 naranja cuestan $10, ¿cuánto cuesta una manzana?</h4>
+                    
+                    <div class="option" onclick="selectOption(this, 'p4q2')">
+                        <input type="radio" name="p4q2" value="a">
+                        a) $1
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'p4q2')">
+                        <input type="radio" name="p4q2" value="b">
+                        b) $2
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'p4q2')">
+                        <input type="radio" name="p4q2" value="c">
+                        c) $3
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'p4q2')">
+                        <input type="radio" name="p4q2" value="d">
+                        d) $4
+                    </div>
+                </div>
+
+                <div class="question">
+                    <h4>Pregunta 3: Un número es 5 unidades mayor que otro. Si su suma es 23, ¿cuál es el número mayor?</h4>
+                    
+                    <div class="option" onclick="selectOption(this, 'p4q3')">
+                        <input type="radio" name="p4q3" value="a">
+                        a) 11
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'p4q3')">
+                        <input type="radio" name="p4q3" value="b">
+                        b) 12
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'p4q3')">
+                        <input type="radio" name="p4q3" value="c">
+                        c) 13
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'p4q3')">
+                        <input type="radio" name="p4q3" value="d">
+                        d) 14
+                    </div>
+                </div>
+
+                <button class="check-btn" onclick="checkAnswers('practice4')">Verificar Respuestas 🎀</button>
+                <div id="result-practice4" class="result"></div>
+            </div>
+
+            <div class="pusheen-decoration">
+                <img src="https://scontent.flim28-1.fna.fbcdn.net/v/t39.30808-6/443819905_984899532998903_8296162074533095555_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=WiqHwF6FDD8Q7kNvwGu4Nmh&_nc_oc=AdmwCdsRJ3_glH9setHaCi2M7_GMFOPiKlcLA0oErtDOBpL2t1fB-s4_zse2Teety3Q&_nc_zt=23&_nc_ht=scontent.flim28-1.fna&_nc_gid=33f9sWu75vWfx9cP1aa9uA&oh=00_AfesGOcAx-i2qGRaK6EuArOGRcfDtS7DoV5OjX_Zf9XmbQ&oe=690C45A5" class="pusheen-img" alt="Pusheen">
+                <span style="font-size: 2.5em;">🌟</span>
+                <img src="https://scontent.flim28-1.fna.fbcdn.net/v/t39.30808-6/443819905_984899532998903_8296162074533095555_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=WiqHwF6FDD8Q7kNvwGu4Nmh&_nc_oc=AdmwCdsRJ3_glH9setHaCi2M7_GMFOPiKlcLA0oErtDOBpL2t1fB-s4_zse2Teety3Q&_nc_zt=23&_nc_ht=scontent.flim28-1.fna&_nc_gid=33f9sWu75vWfx9cP1aa9uA&oh=00_AfesGOcAx-i2qGRaK6EuArOGRcfDtS7DoV5OjX_Zf9XmbQ&oe=690C45A5" class="pusheen-img" alt="Pusheen">
+            </div>
+            <!-- PRÁCTICA 5: MIXTA -->
+            <div class="practice-container">
+                <img src="https://scontent.flim28-1.fna.fbcdn.net/v/t39.30808-6/443819905_984899532998903_8296162074533095555_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=WiqHwF6FDD8Q7kNvwGu4Nmh&_nc_oc=AdmwCdsRJ3_glH9setHaCi2M7_GMFOPiKlcLA0oErtDOBpL2t1fB-s4_zse2Teety3Q&_nc_zt=23&_nc_ht=scontent.flim28-1.fna&_nc_gid=33f9sWu75vWfx9cP1aa9uA&oh=00_AfesGOcAx-i2qGRaK6EuArOGRcfDtS7DoV5OjX_Zf9XmbQ&oe=690C45A5" class="practice-pusheen" alt="pusheen">
+                <h3 style="text-align: center; color: #ff69b4; margin-bottom: 20px;">🎯 Práctica 5: Repaso General</h3>
+                
+                <div class="question">
+                    <h4>Pregunta 1: ¿Cuál es el primer paso para resolver un problema con sistemas de ecuaciones?</h4>
+                    
+                    <div class="option" onclick="selectOption(this, 'p5q1')">
+                        <input type="radio" name="p5q1" value="a">
+                        a) Resolver las ecuaciones inmediatamente
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'p5q1')">
+                        <input type="radio" name="p5q1" value="b">
+                        b) Identificar las incógnitas y asignar variables
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'p5q1')">
+                        <input type="radio" name="p5q1" value="c">
+                        c) Calcular determinantes
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'p5q1')">
+                        <input type="radio" name="p5q1" value="d">
+                        d) Graficar las ecuaciones
+                    </div>
+                </div>
+
+                <div class="question">
+                    <h4>Pregunta 2: Si det(A) = 0, ¿qué podemos concluir sobre la matriz A?</h4>
+                    
+                    <div class="option" onclick="selectOption(this, 'p5q2')">
+                        <input type="radio" name="p5q2" value="a">
+                        a) A tiene inversa
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'p5q2')">
+                        <input type="radio" name="p5q2" value="b">
+                        b) A no tiene inversa
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'p5q2')">
+                        <input type="radio" name="p5q2" value="c">
+                        c) A es la matriz identidad
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'p5q2')">
+                        <input type="radio" name="p5q2" value="d">
+                        d) A es una matriz nula
+                    </div>
+                </div>
+
+                <div class="question">
+                    <h4>Pregunta 3: ¿Cuál de estos NO es un método para resolver sistemas de ecuaciones?</h4>
+                    
+                    <div class="option" onclick="selectOption(this, 'p5q3')">
+                        <input type="radio" name="p5q3" value="a">
+                        a) Método de sustitución
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'p5q3')">
+                        <input type="radio" name="p5q3" value="b">
+                        b) Método de Cramer
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'p5q3')">
+                        <input type="radio" name="p5q3" value="c">
+                        c) Método de reducción
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'p5q3')">
+                        <input type="radio" name="p5q3" value="d">
+                        d) Método de integración
+                    </div>
+                </div>
+
+                <button class="check-btn" onclick="checkAnswers('practice5')">Verificar Respuestas 🎀</button>
+                <div id="result-practice5" class="result"></div>
+            </div>
+
+            <div class="pusheen-decoration">
+                <img src="https://scontent.flim28-1.fna.fbcdn.net/v/t39.30808-6/443819905_984899532998903_8296162074533095555_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=WiqHwF6FDD8Q7kNvwGu4Nmh&_nc_oc=AdmwCdsRJ3_glH9setHaCi2M7_GMFOPiKlcLA0oErtDOBpL2t1fB-s4_zse2Teety3Q&_nc_zt=23&_nc_ht=scontent.flim28-1.fna&_nc_gid=33f9sWu75vWfx9cP1aa9uA&oh=00_AfesGOcAx-i2qGRaK6EuArOGRcfDtS7DoV5OjX_Zf9XmbQ&oe=690C45A5" class="pusheen-img" alt="Pusheen">
+                <span style="font-size: 3em;">💕✨🎉</span>
+                <img src="https://scontent.flim28-1.fna.fbcdn.net/v/t39.30808-6/443819905_984899532998903_8296162074533095555_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=WiqHwF6FDD8Q7kNvwGu4Nmh&_nc_oc=AdmwCdsRJ3_glH9setHaCi2M7_GMFOPiKlcLA0oErtDOBpL2t1fB-s4_zse2Teety3Q&_nc_zt=23&_nc_ht=scontent.flim28-1.fna&_nc_gid=33f9sWu75vWfx9cP1aa9uA&oh=00_AfesGOcAx-i2qGRaK6EuArOGRcfDtS7DoV5OjX_Zf9XmbQ&oe=690C45A5" class="pusheen-img" alt="Pusheen">
+            </div>
+
+            <div style="text-align: center; padding: 30px; background: linear-gradient(135deg, #fff0f5 0%, #e6f3ff 100%); border-radius: 20px; margin: 30px 0;">
+                <h3 style="color: #ff69b4; margin-bottom: 15px;">¡Felicitaciones! 🎊</h3>
+                <p style="font-size: 1.2em; color: #666;">Has completado toda la guía de Álgebra Lineal con Pusheen</p>
+                <p style="font-size: 1.1em; color: #87ceeb; margin-top: 10px;">¡Sigue practicando y serás una experta! 💪🐱</p>
+                <div style="margin-top: 20px;">
+                    <img src="https://scontent.flim28-1.fna.fbcdn.net/v/t39.30808-6/443819905_984899532998903_8296162074533095555_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=WiqHwF6FDD8Q7kNvwGu4Nmh&_nc_oc=AdmwCdsRJ3_glH9setHaCi2M7_GMFOPiKlcLA0oErtDOBpL2t1fB-s4_zse2Teety3Q&_nc_zt=23&_nc_ht=scontent.flim28-1.fna&_nc_gid=33f9sWu75vWfx9cP1aa9uA&oh=00_AfesGOcAx-i2qGRaK6EuArOGRcfDtS7DoV5OjX_Zf9XmbQ&oe=690C45A5" style="width: 100px; height: 100px;" alt="Pusheen">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Respuestas correctas
+        const correctAnswers = {
+            practice1: {
+                p1q1: 'b',  // x=6, y=4
+                p1q2: 'b',  // x=2
+                p1q3: 'c'   // Método de reducción
+            },
+            practice2: {
+                p2q1: 'a',  // [3 7; 3 8]
+                p2q2: 'b',  // [6 3; 12 9]
+                p2q3: 'b'   // columnas de A = filas de B
+            },
+            practice3: {
+                p3q1: 'b',  // det = 10
+                p3q2: 'a',  // cuando det(A) = 0
+                p3q3: 'b'   // columna reemplazada por B
+            },
+            practice4: {
+                p4q1: 'c',  // Juan tiene 30 años
+                p4q2: 'b',  // manzana cuesta $2
+                p4q3: 'd'   // número mayor es 14
+            },
+            practice5: {
+                p5q1: 'b',  // identificar incógnitas
+                p5q2: 'b',  // A no tiene inversa
+                p5q3: 'd'   // integración no es método
+            }
+        };
+
+        // Función para cambiar de sección
+        function showSection(sectionId) {
+            // Ocultar todas las secciones
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Mostrar la sección seleccionada
+            document.getElementById(sectionId).classList.add('active');
+
+            // Actualizar botones de navegación
+            const buttons = document.querySelectorAll('.nav-btn');
+            buttons.forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            // Scroll hacia arriba
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Función para seleccionar opción
+        function selectOption(element, questionName) {
+            // Deseleccionar todas las opciones del mismo grupo
+            const options = document.querySelectorAll(`input[name="${questionName}"]`);
+            options.forEach(opt => {
+                opt.parentElement.style.background = '#f8f8f8';
+                opt.parentElement.style.borderColor = 'transparent';
+            });
+
+            // Seleccionar la opción clickeada
+            const radio = element.querySelector('input[type="radio"]');
+            radio.checked = true;
+            element.style.background = '#ffe4e1';
+            element.style.borderColor = '#ffb6c1';
+        }
+
+        // Función para verificar respuestas
+        function checkAnswers(practiceId) {
+            const answers = correctAnswers[practiceId];
+            let correct = 0;
+            let total = Object.keys(answers).length;
+
+            // Verificar cada pregunta
+            for (let question in answers) {
+                const selected = document.querySelector(`input[name="${question}"]:checked`);
+                if (selected && selected.value === answers[question]) {
+                    correct++;
+                }
+            }
+
+            // Mostrar resultado
+            const resultDiv = document.getElementById(`result-${practiceId}`);
+            const percentage = (correct / total) * 100;
+
+            if (percentage === 100) {
+                resultDiv.className = 'result correct';
+                resultDiv.innerHTML = `
+                    <div style="font-size: 1.3em;">🎉 ¡PERFECTO! 🎉</div>
+                    <div>¡Respondiste todas correctamente! ${correct}/${total}</div>
+                    <div style="margin-top: 10px;">¡Pusheen está muy orgulloso de ti! 🐱💕</div>
+                `;
+            } else if (percentage >= 66) {
+                resultDiv.className = 'result correct';
+                resultDiv.innerHTML = `
+                    <div style="font-size: 1.3em;">✨ ¡MUY BIEN! ✨</div>
+                    <div>Respondiste ${correct}/${total} correctamente</div>
+                    <div style="margin-top: 10px;">¡Sigue así! 🐱💪</div>
+                `;
+            } else {
+                resultDiv.className = 'result incorrect';
+                resultDiv.innerHTML = `
+                    <div style="font-size: 1.3em;">📚 ¡Sigue practicando! 📚</div>
+                    <div>Respondiste ${correct}/${total} correctamente</div>
+                    <div style="margin-top: 10px;">Revisa la teoría y vuelve a intentarlo 🐱💕</div>
+                `;
+            }
+
+            // Scroll al resultado
+            resultDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        // Inicialización
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Guía de Álgebra Lineal con Pusheen cargada correctamente! 🐱💕');
+        });
+    </script>
+</body>
 </html>
-
-
-
